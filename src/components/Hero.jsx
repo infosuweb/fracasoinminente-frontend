@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="absolute top-0 right-0 bottom-0 left-0 md:left-[44%]">
         <img
           src="/img/album1400x1400.png"
-          alt="Fracaso Inminente"
+          alt="Fracaso Inminente — álbum El respeto es algo muy lindo"
           width={1400}
           height={1400}
           className="h-full w-full object-cover"

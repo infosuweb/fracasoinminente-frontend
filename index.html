@@ -4,29 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Fracaso Inminente — Dark Alternative Rock</title>
-    <meta name="description" content="Fracaso Inminente es un proyecto de dark alternative rock que explora tensión, identidad y emoción cruda. Escuchá en Spotify, Bandcamp e Instagram." />
-    <meta name="keywords" content="Fracaso Inminente, dark alternative rock, música, rock alternativo, banda, spotify, bandcamp" />
+    <title>Fracaso Inminente — Banda | Spotify, Bandcamp</title>
+    <meta name="description" content="Fracaso Inminente: banda. Escuchá El respeto es algo muy lindo en Spotify y Bandcamp. Música introspectiva, guitarras y atmósfera reflexiva. Entrá ya." />
+    <meta name="keywords" content="Fracaso Inminente, Fracaso Inminente banda, música rock, rock alternativo España, El respeto es algo muy lindo, spotify, bandcamp, rock alternativo argentina" />
     <meta name="author" content="Fracaso Inminente" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://fracasoinminente.com" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="music.musician" />
-    <meta property="og:title" content="Fracaso Inminente — Dark Alternative Rock" />
-    <meta property="og:description" content="If we fail in their system, that means we did it right. Escuchá en Spotify, Bandcamp e Instagram." />
+    <meta property="og:title" content="Fracaso Inminente — Banda | Oficial" />
+    <meta property="og:description" content="Fracaso Inminente. Escuchá El respeto es algo muy lindo en Spotify, Bandcamp e Instagram. Música introspectiva y guitarras intensas." />
     <meta property="og:url" content="https://fracasoinminente.com" />
     <meta property="og:site_name" content="Fracaso Inminente" />
     <meta property="og:image" content="https://fracasoinminente.com/img/og.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fracaso Inminente — portada oficial" />
     <meta property="og:locale" content="es_AR" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Fracaso Inminente — Dark Alternative Rock" />
-    <meta name="twitter:description" content="If we fail in their system, that means we did it right." />
+    <meta name="twitter:title" content="Fracaso Inminente — Banda | Oficial" />
+    <meta name="twitter:description" content="Fracaso Inminente. Escuchá en Spotify, Bandcamp e Instagram. Música introspectiva y guitarras intensas." />
     <meta name="twitter:image" content="https://fracasoinminente.com/img/og.jpg" />
+    <meta name="twitter:image:alt" content="Fracaso Inminente — portada oficial" />
 
     <!-- Spotify verification -->
     <meta property="music:musician" content="https://open.spotify.com/artist/7ytoVQBwppgzLlauvYSyIu" />
@@ -48,45 +50,71 @@
     <meta name="theme-color" content="#050505" />
     <meta name="msapplication-TileColor" content="#050505" />
 
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD Structured Data: MusicGroup + WebPage + BreadcrumbList -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MusicGroup",
-      "name": "Fracaso Inminente",
-      "url": "https://fracasoinminente.com",
-      "image": "https://fracasoinminente.com/img/artist.jpg",
-      "description": "Fracaso Inminente es un proyecto de dark alternative rock que explora tensión, identidad y emoción cruda.",
-      "genre": ["Dark Alternative Rock", "Alternative Rock", "Rock"],
-      "sameAs": [
-        "https://open.spotify.com/artist/7ytoVQBwppgzLlauvYSyIu",
-        "https://www.instagram.com/fracasoinminente.band",
-        "https://fracasoinminente.bandcamp.com/"
-      ],
-      "album": [
+      "@graph": [
         {
-          "@type": "MusicAlbum",
-          "name": "El respeto es algo muy lindo",
-          "datePublished": "2026",
-          "albumProductionType": "https://schema.org/StudioAlbum"
+          "@type": "MusicGroup",
+          "name": "Fracaso Inminente",
+          "url": "https://fracasoinminente.com",
+          "image": ["https://fracasoinminente.com/img/artist.jpg", "https://fracasoinminente.com/img/og.jpg"],
+          "description": "Fracaso Inminente es un proyecto que explora tensión, identidad y emoción cruda. Música introspectiva construida alrededor de la guitarra y una atmósfera reflexiva.",
+          "genre": ["Rock", "Rock Alternativo", "Alternative Rock"],
+          "sameAs": [
+            "https://open.spotify.com/artist/7ytoVQBwppgzLlauvYSyIu",
+            "https://www.instagram.com/fracasoinminente.band",
+            "https://fracasoinminente.bandcamp.com/"
+          ],
+          "album": [
+            {
+              "@type": "MusicAlbum",
+              "name": "El respeto es algo muy lindo",
+              "datePublished": "2026",
+              "albumProductionType": "https://schema.org/StudioAlbum"
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "66",
+              "datePublished": "2025",
+              "albumProductionType": "https://schema.org/StudioAlbum"
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "DanC",
+              "datePublished": "2025",
+              "albumProductionType": "https://schema.org/StudioAlbum"
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "HMC",
+              "datePublished": "2025",
+              "albumProductionType": "https://schema.org/StudioAlbum"
+            }
+          ]
         },
         {
-          "@type": "MusicAlbum",
-          "name": "66",
-          "datePublished": "2025",
-          "albumProductionType": "https://schema.org/StudioAlbum"
+          "@type": "WebPage",
+          "name": "Fracaso Inminente — Banda | Spotify, Bandcamp",
+          "description": "Sitio oficial de Fracaso Inminente. Escuchá la música en Spotify, Bandcamp e Instagram. Discografía, prensa y enlaces.",
+          "url": "https://fracasoinminente.com",
+          "inLanguage": "es",
+          "isPartOf": {
+            "@type": "WebSite",
+            "name": "Fracaso Inminente",
+            "url": "https://fracasoinminente.com"
+          },
+          "about": {
+            "@type": "MusicGroup",
+            "name": "Fracaso Inminente"
+          }
         },
         {
-          "@type": "MusicAlbum",
-          "name": "DanC",
-          "datePublished": "2025",
-          "albumProductionType": "https://schema.org/StudioAlbum"
-        },
-        {
-          "@type": "MusicAlbum",
-          "name": "HMC",
-          "datePublished": "2025",
-          "albumProductionType": "https://schema.org/StudioAlbum"
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://fracasoinminente.com" }
+          ]
         }
       ]
     }

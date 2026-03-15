@@ -18,16 +18,18 @@ export default function Releases() {
     <section className="px-6 sm:px-12 md:px-16 py-10 sm:py-14" id="releases">
       {/* Section header */}
       <div className="flex items-center gap-4 mb-6">
-        <span
+        <h2
           className="uppercase text-blood"
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.65rem',
             letterSpacing: '0.3em',
+            margin: 0,
+            fontWeight: 400,
           }}
         >
           Discografía
-        </span>
+        </h2>
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
       </div>
 
