@@ -2,6 +2,7 @@ import Hero from './components/Hero'
 import MusicLinks from './components/MusicLinks'
 import Releases from './components/Releases'
 import SpotifyEmbed from './components/SpotifyEmbed'
+import BandcampEmbed from './components/BandcampEmbed'
 import Press from './components/Press'
 import Footer from './components/Footer'
 
@@ -12,6 +13,7 @@ export default function App() {
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <MusicLinks />
         <SpotifyEmbed />
+        <BandcampEmbed />
         <Releases />
         <Press />
       </div>

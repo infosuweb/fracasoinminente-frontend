@@ -11,7 +11,7 @@ export default function SpotifyEmbed() {
             letterSpacing: '0.3em',
           }}
         >
-          Reproducir
+          Spotify
         </span>
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
       </div>
