@@ -1,22 +1,8 @@
-const RELEASES = [
-  { title: 'El respeto es algo muy lindo', year: '2026', type: 'Album' },
-  { title: '66',                           year: '2025', type: 'Album' },
-  { title: 'DanC',                         year: '2025', type: 'Album' },
-  { title: 'HMC',                          year: '2025', type: 'Album' },
-  { title: 'Living Being',                 year: '2025', type: 'Single' },
-  { title: 'Soñé que estaba',              year: '2025', type: 'Single' },
-  { title: 'qORigin',                      year: '2025', type: 'Single' },
-  { title: 'debounceTime',                 year: '2025', type: 'Single' },
-  { title: 'Madness Minor',                year: '2025', type: 'Single' },
-]
-
-const SPOTIFY_BASE =
-  'https://open.spotify.com/intl-es/artist/7ytoVQBwppgzLlauvYSyIu'
+import { RELEASES, SPOTIFY_ARTIST } from '../data/music'
 
 export default function Releases() {
   return (
     <section className="px-6 sm:px-12 md:px-16 py-10 sm:py-14" id="releases">
-      {/* Section header */}
       <div className="flex items-center gap-4 mb-6">
         <h2
           className="uppercase text-blood"
@@ -33,7 +19,6 @@ export default function Releases() {
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
       </div>
 
-      {/* Table header */}
       <div
         className="grid gap-4 pb-3 mb-1"
         style={{
@@ -57,11 +42,10 @@ export default function Releases() {
         ))}
       </div>
 
-      {/* Rows */}
-      {RELEASES.map((r, i) => (
+      {RELEASES.map((release, i) => (
         <a
-          key={r.title}
-          href={SPOTIFY_BASE}
+          key={release.title}
+          href={release.spotifyUrl ?? SPOTIFY_ARTIST}
           target="_blank"
           rel="noopener noreferrer"
           className="group grid gap-4 items-center py-4 sm:py-5 border-b transition-all duration-150 hover:bg-slab"
@@ -86,11 +70,11 @@ export default function Releases() {
               fontFamily: 'var(--font-mono)',
               fontSize: '0.9rem',
               color: '#e8e8e8',
-              fontWeight: i === 0 ? 700 : 400,
+              fontWeight: release.isNew ? 700 : 400,
             }}
           >
-            {r.title}
-            {i === 0 && (
+            {release.title}
+            {release.isNew && (
               <span
                 className="ml-3 align-middle"
                 style={{
@@ -114,7 +98,7 @@ export default function Releases() {
               color: 'var(--color-ink-dim)',
             }}
           >
-            {r.year}
+            {release.year}
           </span>
           <span
             style={{
@@ -125,7 +109,7 @@ export default function Releases() {
               textTransform: 'uppercase',
             }}
           >
-            {r.type}
+            {release.type}
           </span>
         </a>
       ))}

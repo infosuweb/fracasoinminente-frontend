@@ -1,19 +1,8 @@
-const BANDCAMP_BASE = 'https://fracasoinminente.bandcamp.com'
-
-// IDs numéricos obtenidos de las páginas de Bandcamp (parámetro track= es más confiable que url=)
-const TRACKS = [
-  { label: 'Madness minor',       id: 1884971493 },
-  { label: 'debounceTime',        id: 2045998602 },
-  { label: 'danC',                id: 3817215727 },
-  { label: 'qORigin',             id: 886539658  },
-  { label: 'Living Being (inst.)', id: 3455489065 },
-  { label: 'HMC',                 id: 3911471683 },
-  { label: 'rkk',                 id: 2391899662 },
-]
-
-function embedSrc(trackId) {
-  return `https://bandcamp.com/EmbeddedPlayer/track=${trackId}/size=small/bgcol=070707/linkcol=cc0000/transparent=true/`
-}
+import {
+  BANDCAMP_BASE,
+  BANDCAMP_TRACKS,
+  bandcampEmbedSrc,
+} from '../data/music'
 
 export default function BandcampEmbed() {
   return (
@@ -41,11 +30,11 @@ export default function BandcampEmbed() {
           overflow: 'hidden',
         }}
       >
-        {TRACKS.map((t) => (
+        {BANDCAMP_TRACKS.map((track) => (
           <iframe
-            key={t.id}
-            title={`Bandcamp: ${t.label}`}
-            src={embedSrc(t.id)}
+            key={track.id}
+            title={`Bandcamp: ${track.label}`}
+            src={bandcampEmbedSrc(track.id)}
             style={{ border: 0, width: '100%', height: '42px', display: 'block' }}
             seamless
             loading="lazy"
