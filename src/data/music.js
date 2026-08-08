@@ -3,13 +3,36 @@ export const SPOTIFY_ARTIST =
 
 export const BANDCAMP_BASE = 'https://fracasoinminente.bandcamp.com'
 
-/** Discografía completa — más reciente primero */
+/** Discografía completa — más reciente primero (Bandcamp + Spotify, ago 2026) */
 export const RELEASES = [
+  {
+    title: 'QPachó?',
+    year: '2026',
+    type: 'Single',
+    isNew: true,
+  },
+  {
+    title: 'Rain',
+    year: '2026',
+    type: 'Single',
+    spotifyUrl: 'https://open.spotify.com/album/4jRzljVGgLdfgZUYgNTNWh',
+  },
+  {
+    title: '77',
+    year: '2026',
+    type: 'Single',
+    spotifyUrl: 'https://open.spotify.com/album/38vLotQKzRKMVTKibP06w5',
+  },
+  {
+    title: 'Otra vez en verano',
+    year: '2026',
+    type: 'Single',
+    spotifyUrl: 'https://open.spotify.com/album/1EEbTfPXOfu04GQzZrHia1',
+  },
   {
     title: 'Atrapado en el tiempo',
     year: '2026',
     type: 'Single',
-    isNew: true,
     spotifyUrl: 'https://open.spotify.com/album/2vXIv3I7QpYdjlh7bLlw1m',
   },
   {
@@ -25,21 +48,34 @@ export const RELEASES = [
     spotifyUrl: 'https://open.spotify.com/album/3PsiA8jx0NuWLQZqbbSGbU',
   },
   {
+    title: 'Litigio',
+    year: '2026',
+    type: 'Single',
+  },
+  {
     title: 'El respeto es algo muy lindo',
     year: '2026',
     type: 'Single',
     spotifyUrl: 'https://open.spotify.com/album/2egDDKe0UDbTpLfeuopXWP',
   },
-  { title: 'Rikk', year: '2025', type: 'Single' },
   {
-    title: '66',
+    title: 'Rikk',
     year: '2025',
-    type: 'Album',
-    spotifyUrl: 'https://open.spotify.com/album/04dhS9dTst6rz9fZQxAXBR',
+    type: 'Single',
   },
-  { title: 'DanC', year: '2025', type: 'Album' },
   {
-    title: 'HMC',
+    title: 'Soñé que estaba',
+    year: '2025',
+    type: 'Single',
+    spotifyUrl: 'https://open.spotify.com/album/0a4gr7EsjE1MGZhq88Exku',
+  },
+  {
+    title: 'Vols',
+    year: '2025',
+    type: 'Single',
+  },
+  {
+    title: 'Hoy MC',
     year: '2025',
     type: 'Single',
     spotifyUrl: 'https://open.spotify.com/album/46mybzU8nTjuCZhSiSDYkR',
@@ -57,33 +93,56 @@ export const RELEASES = [
     spotifyUrl: 'https://open.spotify.com/album/4V3QmHcgpWlngkCgUQQJZd',
   },
   {
-    title: 'Soñé que estaba',
+    title: 'qOrigin',
     year: '2025',
     type: 'Single',
-    spotifyUrl: 'https://open.spotify.com/album/0a4gr7EsjE1MGZhq88Exku',
   },
-  { title: 'qORigin', year: '2025', type: 'Single' },
-  { title: 'debounceTime', year: '2025', type: 'Single' },
-  { title: 'Madness Minor', year: '2025', type: 'Single' },
+  {
+    title: 'Dan C',
+    year: '2025',
+    type: 'Single',
+  },
+  {
+    title: 'Debounce Time',
+    year: '2025',
+    type: 'Single',
+  },
+  {
+    title: '66',
+    year: '2025',
+    type: 'Single',
+    spotifyUrl: 'https://open.spotify.com/album/04dhS9dTst6rz9fZQxAXBR',
+  },
+  {
+    title: 'Madness Minor',
+    year: '2025',
+    type: 'Single',
+  },
 ]
 
 /**
  * Tracks con reproductor embebido en Bandcamp.
- * IDs obtenidos de las páginas de Bandcamp (parámetro track=).
+ * IDs = tralbum_id de cada página /track (ago 2026).
  */
 export const BANDCAMP_TRACKS = [
+  { label: 'QPachó?', id: 2755078416 },
+  { label: 'Rain', id: 1558500824 },
+  { label: '77', id: 965501322 },
+  { label: 'Otra vez en verano', id: 1590949334 },
   { label: 'Atrapado en el tiempo', id: 3012761151 },
   { label: 'Concept', id: 636952075 },
   { label: 'Temnoreg', id: 1434571680 },
+  { label: 'Litigio', id: 649364037 },
   { label: 'El respeto es algo muy lindo', id: 3757018086 },
   { label: 'Rikk', id: 2391899662 },
-  { label: 'Madness minor', id: 1884971493 },
-  { label: 'debounceTime', id: 2045998602 },
-  { label: 'qORigin', id: 886539658 },
+  { label: 'Vols', id: 1507265218 },
+  { label: 'Hoy MC', id: 3911471683 },
   { label: 'Living Being (inst.)', id: 3455489065 },
   { label: 'Living being', id: 2425104754 },
-  { label: 'HMC', id: 3911471683 },
+  { label: 'qOrigin', id: 886539658 },
   { label: 'Dan C', id: 3817215727 },
+  { label: 'Debounce Time', id: 2045998602 },
+  { label: 'Madness minor', id: 1884971493 },
 ]
 
 export function bandcampEmbedSrc(trackId) {

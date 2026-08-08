@@ -29,24 +29,9 @@ export default function Hero() {
             height: '1px',
             background: 'var(--color-snow-line)',
             maxWidth: '420px',
-            margin: '2rem 0 1.5rem',
+            margin: '2rem 0 1.75rem',
           }}
         />
-
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.75rem',
-            letterSpacing: '0.06em',
-            lineHeight: '1.7',
-            textTransform: 'uppercase',
-            color: 'var(--color-snow-dim)',
-            maxWidth: '28rem',
-            margin: '0 0 2rem',
-          }}
-        >
-          Si fallamos en su sistema, lo hicimos bien.
-        </p>
 
         <a
           href="#listen"
