@@ -57,8 +57,8 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="transition-colors duration-150 hover:text-blood"
-              style={{ color: '#cccccc' }}
+              className="transition-colors duration-150 hover:text-blood cursor-pointer inline-flex items-center justify-center"
+              style={{ color: '#cccccc', minWidth: '44px', minHeight: '44px' }}
             >
               {s.icon}
             </a>

@@ -4,18 +4,7 @@ export default function Releases() {
   return (
     <section className="px-6 sm:px-12 md:px-16 py-10 sm:py-14" id="releases">
       <div className="flex items-center gap-4 mb-6">
-        <h2
-          className="uppercase text-blood"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.65rem',
-            letterSpacing: '0.3em',
-            margin: 0,
-            fontWeight: 400,
-          }}
-        >
-          Discografía
-        </h2>
+        <h2 className="section-label">Discografía</h2>
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
       </div>
 
@@ -48,10 +37,11 @@ export default function Releases() {
           href={release.spotifyUrl ?? SPOTIFY_ARTIST}
           target="_blank"
           rel="noopener noreferrer"
-          className="group grid gap-4 items-center py-4 sm:py-5 border-b transition-all duration-150 hover:bg-slab"
+          className="group grid gap-4 items-center py-4 sm:py-5 border-b transition-colors duration-150 hover:bg-slab cursor-pointer"
           style={{
             gridTemplateColumns: '2rem 1fr auto auto',
             borderColor: 'var(--color-line)',
+            minHeight: '44px',
           }}
         >
           <span

@@ -1,23 +1,25 @@
 import Hero from './components/Hero'
+import ArtStrip from './components/ArtStrip'
+import ListenPlayer from './components/ListenPlayer'
 import MusicLinks from './components/MusicLinks'
 import Releases from './components/Releases'
-import SpotifyEmbed from './components/SpotifyEmbed'
-import BandcampEmbed from './components/BandcampEmbed'
 import Press from './components/Press'
 import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="min-h-svh" style={{ background: 'var(--color-paper)' }}>
+    <div className="min-h-svh">
       <Hero />
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <MusicLinks />
-        <SpotifyEmbed />
-        <BandcampEmbed />
-        <Releases />
-        <Press />
+      <ArtStrip />
+      <div className="zone-dark">
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <ListenPlayer />
+          <MusicLinks />
+          <Releases />
+          <Press />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }

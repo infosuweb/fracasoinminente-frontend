@@ -22,22 +22,10 @@ export default function Press() {
     <section className="px-6 sm:px-12 md:px-16 py-10 sm:py-14" id="press">
       {/* Section header */}
       <div className="flex items-center gap-4 mb-8">
-        <h2
-          className="uppercase text-blood"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.65rem',
-            letterSpacing: '0.3em',
-            margin: 0,
-            fontWeight: 400,
-          }}
-        >
-          Prensa
-        </h2>
+        <h2 className="section-label">Prensa</h2>
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
       </div>
 
-      {/* Cards grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {PRESS.map((item) => (
           <a
@@ -45,26 +33,22 @@ export default function Press() {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex flex-col gap-4 p-6 transition-all duration-200"
+            className="group flex flex-col gap-4 p-6 transition-colors duration-200 cursor-pointer press-item"
             style={{
               background: 'var(--color-slab)',
               borderTop: '2px solid var(--color-line)',
               textDecoration: 'none',
+              minHeight: '44px',
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.borderTopColor = 'var(--color-blood)')
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.borderTopColor = 'var(--color-line)')
-            }
           >
-            {/* Outlet name */}
             <span
               className="uppercase"
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '0.75rem',
-                letterSpacing: '0.25em',
+                fontWeight: 700,
+                fontStyle: 'italic',
+                fontSize: '0.85rem',
+                letterSpacing: '0.18em',
                 color: 'var(--color-blood)',
               }}
             >

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -10,8 +9,14 @@
   --color-line: #282828;
   --color-blood: #e11d23;
   --color-blood-dim: #7f0f12;
+  --color-glitch-cyan: #00e5ff;
+  --color-glitch-red: #ff003c;
+  --color-snow: #ffffff;
+  --color-snow-ink: #0a0a0a;
+  --color-snow-dim: #444444;
+  --color-snow-line: #dddddd;
 
-  --font-display: 'Bebas Neue', 'Impact', 'Arial Narrow', sans-serif;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', Impact, sans-serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
 }
 
@@ -19,10 +24,21 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .glitch-wordmark__layer--red,
+  .glitch-wordmark__layer--cyan {
+    animation: none !important;
+  }
+}
+
 body {
   margin: 0;
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: var(--color-snow);
+  color: var(--color-snow-ink);
   font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -31,6 +47,11 @@ body {
 ::selection {
   background: var(--color-blood);
   color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blood);
+  outline-offset: 3px;
 }
 
 /* Grain noise overlay (CSS-only) */
@@ -43,5 +64,109 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 200px 200px;
-  opacity: 0.5;
+  opacity: 0.35;
+}
+
+.zone-dark {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.zone-dark :focus-visible {
+  outline-color: var(--color-blood);
+}
+
+/* Chromatic wordmark — cyan/red only here */
+.glitch-wordmark {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(4.25rem, 18vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-snow-ink);
+  margin: 0;
+}
+
+.glitch-wordmark__layer {
+  display: block;
+}
+
+.glitch-wordmark__layer--ghost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.glitch-wordmark__layer--red {
+  color: var(--color-glitch-red);
+  transform: translate(-3px, 1px);
+  z-index: 0;
+}
+
+.glitch-wordmark__layer--cyan {
+  color: var(--color-glitch-cyan);
+  transform: translate(3px, -1px);
+  z-index: 0;
+}
+
+.glitch-wordmark__layer--main {
+  position: relative;
+  z-index: 1;
+  color: var(--color-snow-ink);
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glitch-wordmark:hover .glitch-wordmark__layer--red {
+    animation: glitch-shift-red 0.45s steps(2, end) 1;
+  }
+
+  .glitch-wordmark:hover .glitch-wordmark__layer--cyan {
+    animation: glitch-shift-cyan 0.45s steps(2, end) 1;
+  }
+}
+
+@keyframes glitch-shift-red {
+  0%,
+  100% {
+    transform: translate(-3px, 1px);
+  }
+  40% {
+    transform: translate(-6px, 2px);
+  }
+  70% {
+    transform: translate(-2px, -1px);
+  }
+}
+
+@keyframes glitch-shift-cyan {
+  0%,
+  100% {
+    transform: translate(3px, -1px);
+  }
+  35% {
+    transform: translate(6px, -2px);
+  }
+  65% {
+    transform: translate(2px, 1px);
+  }
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-blood);
+  margin: 0;
+  font-weight: 400;
+}
+
+.press-item:hover {
+  border-top-color: var(--color-blood) !important;
 }
