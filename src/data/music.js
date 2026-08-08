@@ -3,18 +3,28 @@ export const SPOTIFY_ARTIST =
 
 export const BANDCAMP_BASE = 'https://fracasoinminente.bandcamp.com'
 
+/** Single líder de la campaña actual (crecimiento Spotify) */
+export const LEADER = {
+  title: 'Rain',
+  spotifyUrl: 'https://open.spotify.com/album/4jRzljVGgLdfgZUYgNTNWh',
+  spotifyEmbedSrc:
+    'https://open.spotify.com/embed/album/4jRzljVGgLdfgZUYgNTNWh?utm_source=generator&theme=0',
+  bandcampUrl: 'https://fracasoinminente.bandcamp.com/track/rain',
+  bandcampTrackId: 1558500824,
+}
+
 /** Discografía completa — más reciente primero (Bandcamp + Spotify, ago 2026) */
 export const RELEASES = [
   {
     title: 'QPachó?',
     year: '2026',
     type: 'Single',
-    isNew: true,
   },
   {
     title: 'Rain',
     year: '2026',
     type: 'Single',
+    isNew: true,
     spotifyUrl: 'https://open.spotify.com/album/4jRzljVGgLdfgZUYgNTNWh',
   },
   {

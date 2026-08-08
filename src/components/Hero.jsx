@@ -1,3 +1,5 @@
+import { LEADER } from '../data/music'
+
 export default function Hero() {
   return (
     <section
@@ -33,34 +35,64 @@ export default function Hero() {
           }}
         />
 
-        <a
-          href="#listen"
-          className="inline-flex items-center gap-3 cursor-pointer transition-colors duration-200"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.7rem',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            textDecoration: 'none',
-            color: 'var(--color-snow-ink)',
-            borderBottom: '2px solid var(--color-blood)',
-            paddingBottom: '0.35rem',
-            width: 'fit-content',
-            minHeight: '44px',
-          }}
-        >
-          Escuchar
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            className="w-4 h-4"
-            aria-hidden="true"
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+          <a
+            href={LEADER.spotifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 cursor-pointer transition-colors duration-200"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.7rem',
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              color: 'var(--color-snow-ink)',
+              borderBottom: '2px solid var(--color-blood)',
+              paddingBottom: '0.35rem',
+              width: 'fit-content',
+              minHeight: '44px',
+            }}
           >
-            <path d="M12 5v14M5 12l7 7 7-7" />
-          </svg>
-        </a>
+            Escuchar {LEADER.title}
+            <span
+              style={{
+                fontSize: '0.55rem',
+                letterSpacing: '0.2em',
+                color: 'var(--color-blood)',
+                border: '1px solid var(--color-blood)',
+                padding: '2px 6px',
+              }}
+            >
+              Nuevo
+            </span>
+          </a>
+          <a
+            href="#listen"
+            className="inline-flex items-center gap-2 cursor-pointer transition-colors duration-200"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.65rem',
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              color: 'var(--color-snow-dim)',
+              minHeight: '44px',
+            }}
+          >
+            Reproductor
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="w-4 h-4"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   )

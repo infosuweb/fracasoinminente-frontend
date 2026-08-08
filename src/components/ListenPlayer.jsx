@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
   BANDCAMP_BASE,
   BANDCAMP_TRACKS,
+  LEADER,
   bandcampEmbedSrc,
 } from '../data/music'
 
@@ -50,6 +51,70 @@ export default function ListenPlayer() {
       <div className="flex items-center gap-4 mb-6">
         <h2 className="section-label">Reproducir</h2>
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
+      </div>
+
+      <div
+        className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 sm:p-6"
+        style={{
+          border: '1px solid var(--color-blood)',
+          background: 'var(--color-slab)',
+        }}
+      >
+        <div>
+          <p className="section-label" style={{ marginBottom: '0.5rem' }}>
+            Single líder
+          </p>
+          <p
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontStyle: 'italic',
+              fontWeight: 800,
+              fontSize: 'clamp(1.75rem, 5vw, 2.75rem)',
+              lineHeight: 1,
+              textTransform: 'uppercase',
+              margin: 0,
+              color: 'var(--color-ink)',
+            }}
+          >
+            {LEADER.title}
+            <span
+              className="ml-3 align-middle"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontStyle: 'normal',
+                fontWeight: 400,
+                fontSize: '0.55rem',
+                letterSpacing: '0.2em',
+                color: 'var(--color-blood)',
+                border: '1px solid var(--color-blood)',
+                padding: '2px 6px',
+                verticalAlign: 'middle',
+              }}
+            >
+              Nuevo
+            </span>
+          </p>
+        </div>
+        <a
+          href={LEADER.spotifyUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer inline-flex items-center justify-center transition-colors duration-200"
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '0.65rem',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            color: 'var(--color-ink)',
+            background: 'var(--color-blood)',
+            minHeight: '44px',
+            padding: '0 1.25rem',
+            width: 'fit-content',
+          }}
+        >
+          Abrir en Spotify
+        </a>
       </div>
 
       <div
@@ -110,8 +175,8 @@ export default function ListenPlayer() {
       >
         {tab === 'spotify' && (
           <iframe
-            title="Spotify: Fracaso Inminente"
-            src="https://open.spotify.com/embed/artist/7ytoVQBwppgzLlauvYSyIu?utm_source=generator&theme=0"
+            title={`Spotify: ${LEADER.title}`}
+            src={LEADER.spotifyEmbedSrc}
             width="100%"
             height="352"
             frameBorder="0"
@@ -134,16 +199,25 @@ export default function ListenPlayer() {
       >
         {tab === 'bandcamp' && (
           <>
-            {BANDCAMP_TRACKS.map((track) => (
-              <iframe
-                key={track.id}
-                title={`Bandcamp: ${track.label}`}
-                src={bandcampEmbedSrc(track.id)}
-                style={{ border: 0, width: '100%', height: '42px', display: 'block' }}
-                seamless
-                loading="lazy"
-              />
-            ))}
+            <iframe
+              title={`Bandcamp: ${LEADER.title}`}
+              src={bandcampEmbedSrc(LEADER.bandcampTrackId)}
+              style={{ border: 0, width: '100%', height: '42px', display: 'block' }}
+              seamless
+              loading="lazy"
+            />
+            {BANDCAMP_TRACKS.filter((track) => track.id !== LEADER.bandcampTrackId).map(
+              (track) => (
+                <iframe
+                  key={track.id}
+                  title={`Bandcamp: ${track.label}`}
+                  src={bandcampEmbedSrc(track.id)}
+                  style={{ border: 0, width: '100%', height: '42px', display: 'block' }}
+                  seamless
+                  loading="lazy"
+                />
+              ),
+            )}
           </>
         )}
       </div>
@@ -159,6 +233,20 @@ export default function ListenPlayer() {
           }}
         >
           <a
+            href={LEADER.bandcampUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer inline-flex items-center"
+            style={{
+              color: 'var(--color-blood)',
+              textDecoration: 'underline',
+              minHeight: '44px',
+            }}
+          >
+            {LEADER.title} en Bandcamp
+          </a>
+          {' · '}
+          <a
             href={BANDCAMP_BASE}
             target="_blank"
             rel="noopener noreferrer"
@@ -169,9 +257,8 @@ export default function ListenPlayer() {
               minHeight: '44px',
             }}
           >
-            Ver todo en Bandcamp
+            Ver todo
           </a>
-          {' — comprar y escuchar en alta calidad.'}
         </p>
       )}
     </section>
