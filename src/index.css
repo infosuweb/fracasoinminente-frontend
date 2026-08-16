@@ -200,6 +200,20 @@ body::after {
   text-transform: uppercase;
 }
 
+.featured-video-link {
+  display: inline-flex;
+  min-height: 44px;
+  margin-top: 1.75rem;
+  align-items: center;
+  color: #ffe100;
+  border-bottom: 2px solid #ffe100;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 .featured-video-frame {
   position: relative;
   width: min(100%, 390px);

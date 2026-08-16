@@ -1,3 +1,5 @@
+const REEL_URL = 'https://www.instagram.com/fracasoinminente.band/reel/DcG3ZXgsJ5g/'
+
 export default function FeaturedVideo() {
   return (
     <section className="px-6 sm:px-12 md:px-16 py-12 sm:py-16" id="video">
@@ -13,6 +15,14 @@ export default function FeaturedVideo() {
             <br />
             de Batman
           </h2>
+          <a
+            className="featured-video-link"
+            href={REEL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver también en Instagram ↗
+          </a>
         </div>
 
         <div className="featured-video-frame">
