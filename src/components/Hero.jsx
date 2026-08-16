@@ -1,98 +1,56 @@
 import { LEADER } from '../data/music'
 
+const REEL_URL = 'https://www.instagram.com/fracasoinminente.band/reel/DcG3ZXgsJ5g/'
+
 export default function Hero() {
   return (
-    <section
-      className="relative min-h-svh flex flex-col"
-      style={{ background: 'var(--color-snow)', color: 'var(--color-snow-ink)' }}
-      aria-label="Fracaso Inminente"
-    >
-      <div className="relative z-10 flex flex-col justify-end flex-1 px-6 sm:px-10 md:px-14 pb-16 sm:pb-20 pt-24">
-        <h1 className="glitch-wordmark">
-          <span className="glitch-wordmark__layer glitch-wordmark__layer--ghost glitch-wordmark__layer--red" aria-hidden="true">
-            Fracaso
-            <br />
-            Inminente
-          </span>
-          <span className="glitch-wordmark__layer glitch-wordmark__layer--ghost glitch-wordmark__layer--cyan" aria-hidden="true">
-            Fracaso
-            <br />
-            Inminente
-          </span>
-          <span className="glitch-wordmark__layer glitch-wordmark__layer--main">
-            Fracaso
-            <br />
-            Inminente
-          </span>
+    <section className="hero-batman" aria-label="Fracaso Inminente — El curro de Batman">
+      <div className="hero-batman__beam" aria-hidden="true" />
+
+      <div className="hero-batman__copy">
+        <p className="hero-batman__eyebrow">Fracaso Inminente presenta</p>
+        <h1 className="hero-batman__wordmark">
+          Fracaso
+          <br />
+          Inminente
         </h1>
 
-        <div
-          style={{
-            height: '1px',
-            background: 'var(--color-snow-line)',
-            maxWidth: '420px',
-            margin: '2rem 0 1.75rem',
-          }}
-        />
+        <div className="hero-batman__release">
+          <span>Nuevo video</span>
+          <strong>El curro de Batman</strong>
+        </div>
 
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+        <div className="hero-batman__actions">
+          <a className="hero-batman__primary" href="#video-principal">
+            Ver video ↓
+          </a>
           <a
             href={LEADER.spotifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 cursor-pointer transition-colors duration-200"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.7rem',
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              color: 'var(--color-snow-ink)',
-              borderBottom: '2px solid var(--color-blood)',
-              paddingBottom: '0.35rem',
-              width: 'fit-content',
-              minHeight: '44px',
-            }}
+            className="hero-batman__secondary"
           >
             Escuchar {LEADER.title}
-            <span
-              style={{
-                fontSize: '0.55rem',
-                letterSpacing: '0.2em',
-                color: 'var(--color-blood)',
-                border: '1px solid var(--color-blood)',
-                padding: '2px 6px',
-              }}
-            >
-              Nuevo
-            </span>
-          </a>
-          <a
-            href="#listen"
-            className="inline-flex items-center gap-2 cursor-pointer transition-colors duration-200"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.65rem',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              color: 'var(--color-snow-dim)',
-              minHeight: '44px',
-            }}
-          >
-            Reproductor
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              className="w-4 h-4"
-              aria-hidden="true"
-            >
-              <path d="M12 5v14M5 12l7 7 7-7" />
-            </svg>
           </a>
         </div>
+      </div>
+
+      <div className="hero-batman__media" id="video-principal">
+        <div className="hero-batman__video-shell">
+          <video
+            controls
+            playsInline
+            preload="metadata"
+            poster="/media/el-curro-de-batman-cover.jpg"
+            aria-label="El curro de Batman — Fracaso Inminente"
+          >
+            <source src="/media/el-curro-de-batman.mp4" type="video/mp4" />
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <a className="hero-batman__instagram" href={REEL_URL} target="_blank" rel="noopener noreferrer">
+          Ver también en Instagram ↗
+        </a>
       </div>
     </section>
   )

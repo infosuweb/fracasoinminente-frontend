@@ -106,7 +106,7 @@ export default function SmartLinks() {
                 padding: '0.9rem 1.1rem',
                 border: `1px solid ${link.primary ? 'var(--color-blood)' : 'var(--color-line)'}`,
                 background: link.primary ? 'var(--color-blood)' : 'var(--color-slab)',
-                color: 'var(--color-ink)',
+                color: link.primary ? '#050505' : 'var(--color-ink)',
               }}
             >
               <span>

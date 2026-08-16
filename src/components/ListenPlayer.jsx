@@ -106,7 +106,7 @@ export default function ListenPlayer() {
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
             textDecoration: 'none',
-            color: 'var(--color-ink)',
+            color: '#050505',
             background: 'var(--color-blood)',
             minHeight: '44px',
             padding: '0 1.25rem',
