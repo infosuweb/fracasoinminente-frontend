@@ -1,16 +1,19 @@
 export const SPOTIFY_ARTIST =
   'https://open.spotify.com/intl-es/artist/7ytoVQBwppgzLlauvYSyIu'
 
+export const SPOTIFY_PLAYLIST =
+  'https://open.spotify.com/playlist/4FhzoaKwLXbM1W6ssWz8pU'
+
 export const BANDCAMP_BASE = 'https://fracasoinminente.bandcamp.com'
 
 /** Single líder de la campaña actual (crecimiento Spotify) */
 export const LEADER = {
-  title: 'Rain',
-  spotifyUrl: 'https://open.spotify.com/album/4jRzljVGgLdfgZUYgNTNWh',
+  title: 'Otra vez en verano',
+  spotifyUrl: 'https://open.spotify.com/track/1OYsGwVQjXKSL9eVonTqO5',
   spotifyEmbedSrc:
-    'https://open.spotify.com/embed/album/4jRzljVGgLdfgZUYgNTNWh?utm_source=generator&theme=0',
-  bandcampUrl: 'https://fracasoinminente.bandcamp.com/track/rain',
-  bandcampTrackId: 1558500824,
+    'https://open.spotify.com/embed/track/1OYsGwVQjXKSL9eVonTqO5?utm_source=generator&theme=0',
+  bandcampUrl: 'https://fracasoinminente.bandcamp.com/track/otra-vez-en-verano',
+  bandcampTrackId: 1590949334,
 }
 
 /** Discografía completa — más reciente primero (Bandcamp + Spotify, ago 2026) */
@@ -19,13 +22,6 @@ export const RELEASES = [
     title: 'QPachó?',
     year: '2026',
     type: 'Single',
-  },
-  {
-    title: 'Rain',
-    year: '2026',
-    type: 'Single',
-    isNew: true,
-    spotifyUrl: 'https://open.spotify.com/album/4jRzljVGgLdfgZUYgNTNWh',
   },
   {
     title: '77',
@@ -136,7 +132,6 @@ export const RELEASES = [
  */
 export const BANDCAMP_TRACKS = [
   { label: 'QPachó?', id: 2755078416 },
-  { label: 'Rain', id: 1558500824 },
   { label: '77', id: 965501322 },
   { label: 'Otra vez en verano', id: 1590949334 },
   { label: 'Atrapado en el tiempo', id: 3012761151 },

@@ -1,14 +1,21 @@
-import { BANDCAMP_BASE, LEADER, SPOTIFY_ARTIST } from '../data/music'
+import { BANDCAMP_BASE, LEADER, SPOTIFY_ARTIST, SPOTIFY_PLAYLIST } from '../data/music'
 
 const INSTAGRAM = 'https://www.instagram.com/fracasoinminente.band'
 
 const LINKS = [
   {
-    id: 'spotify-rain',
+    id: 'spotify-playlist',
+    name: 'Spotify — playlist oficial',
+    hint: 'Todo Fracaso Inminente',
+    url: SPOTIFY_PLAYLIST,
+    primary: true,
+  },
+  {
+    id: 'spotify-leader',
     name: `Spotify — ${LEADER.title}`,
     hint: 'Single líder',
     url: LEADER.spotifyUrl,
-    primary: true,
+    primary: false,
   },
   {
     id: 'spotify-artist',
@@ -18,7 +25,7 @@ const LINKS = [
     primary: false,
   },
   {
-    id: 'bandcamp-rain',
+    id: 'bandcamp-leader',
     name: `Bandcamp — ${LEADER.title}`,
     hint: 'Comprá / alta calidad',
     url: LEADER.bandcampUrl,
