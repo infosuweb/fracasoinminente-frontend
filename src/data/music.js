@@ -5,6 +5,7 @@ export const SPOTIFY_PLAYLIST =
   'https://open.spotify.com/playlist/4FhzoaKwLXbM1W6ssWz8pU'
 
 export const BANDCAMP_BASE = 'https://fracasoinminente.bandcamp.com'
+export const YOUTUBE_CHANNEL = 'https://www.youtube.com/channel/UC_I0KeMzcVHRgreLZcY4heg'
 
 /** Single líder de la campaña actual (crecimiento Spotify) */
 export const LEADER = {

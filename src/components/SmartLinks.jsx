@@ -1,8 +1,15 @@
-import { BANDCAMP_BASE, LEADER, SPOTIFY_ARTIST, SPOTIFY_PLAYLIST } from '../data/music'
+import { BANDCAMP_BASE, LEADER, SPOTIFY_ARTIST, SPOTIFY_PLAYLIST, YOUTUBE_CHANNEL } from '../data/music'
 
 const INSTAGRAM = 'https://www.instagram.com/fracasoinminente.band'
 
 const LINKS = [
+  {
+    id: 'youtube-channel',
+    name: 'YouTube — canal oficial',
+    hint: 'Videos, Shorts y estrenos',
+    url: YOUTUBE_CHANNEL,
+    primary: true,
+  },
   {
     id: 'spotify-playlist',
     name: 'Spotify — playlist oficial',

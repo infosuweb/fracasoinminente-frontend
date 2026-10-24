@@ -272,6 +272,7 @@ body::after {
 
 .hero-batman__primary,
 .hero-batman__secondary,
+.hero-batman__youtube,
 .hero-batman__instagram {
   display: inline-flex;
   min-height: 44px;
@@ -291,9 +292,16 @@ body::after {
 }
 
 .hero-batman__secondary,
+.hero-batman__youtube,
 .hero-batman__instagram {
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.58);
+}
+
+.hero-batman__youtube {
+  color: #ffe100;
+  border: 1px solid rgba(255, 225, 0, 0.72);
+  padding: 0 1rem;
 }
 
 .hero-batman__media {
@@ -333,9 +341,15 @@ body::after {
   }
 
   .hero-batman__secondary:hover,
+  .hero-batman__youtube:hover,
   .hero-batman__instagram:hover {
     color: #ffe100;
     border-bottom-color: #ffe100;
+  }
+
+  .hero-batman__youtube:hover {
+    background: #ffe100;
+    color: #050505;
   }
 }
 

@@ -1,4 +1,4 @@
-import { LEADER } from '../data/music'
+import { LEADER, YOUTUBE_CHANNEL } from '../data/music'
 
 const REEL_URL = 'https://www.instagram.com/fracasoinminente.band/reel/DcG3ZXgsJ5g/'
 
@@ -31,6 +31,14 @@ export default function Hero() {
             className="hero-batman__secondary"
           >
             Escuchar {LEADER.title}
+          </a>
+          <a
+            href={YOUTUBE_CHANNEL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-batman__youtube"
+          >
+            Suscribite en YouTube ↗
           </a>
         </div>
       </div>
