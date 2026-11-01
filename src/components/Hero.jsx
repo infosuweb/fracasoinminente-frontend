@@ -1,34 +1,29 @@
 import { LEADER, YOUTUBE_CHANNEL } from '../data/music'
+import LissajousTitle from './LissajousTitle'
 
-const REEL_URL = 'https://www.instagram.com/fracasoinminente.band/reel/DcG3ZXgsJ5g/'
+const INSTAGRAM = 'https://www.instagram.com/fracasoinminente.band/'
 
 export default function Hero() {
   return (
-    <section className="hero-batman" aria-label="Fracaso Inminente — El curro de Batman">
-      <div className="hero-batman__beam" aria-hidden="true" />
+    <section className="hero-release" aria-label="Fracaso Inminente — Phalaropus">
+      <div className="hero-release__copy">
+        <p className="hero-release__eyebrow">Nuevo single</p>
+        <LissajousTitle />
 
-      <div className="hero-batman__copy">
-        <p className="hero-batman__eyebrow">Fracaso Inminente presenta</p>
-        <h1 className="hero-batman__wordmark">
-          Fracaso
-          <br />
-          Inminente
-        </h1>
-
-        <div className="hero-batman__release">
+        <div className="hero-release__release">
           <span>Nuevo video</span>
-          <strong>El curro de Batman</strong>
+          <strong>En tu mente</strong>
         </div>
 
-        <div className="hero-batman__actions">
-          <a className="hero-batman__primary" href="#video-principal">
+        <div className="hero-release__actions">
+          <a className="hero-release__primary" href="#video-principal">
             Ver video ↓
           </a>
           <a
             href={LEADER.spotifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-batman__secondary"
+            className="hero-release__secondary"
           >
             Escuchar {LEADER.title}
           </a>
@@ -36,27 +31,27 @@ export default function Hero() {
             href={YOUTUBE_CHANNEL}
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-batman__youtube"
+            className="hero-release__youtube"
           >
             Suscribite en YouTube ↗
           </a>
         </div>
       </div>
 
-      <div className="hero-batman__media" id="video-principal">
-        <div className="hero-batman__video-shell">
+      <div className="hero-release__media" id="video-principal">
+        <div className="hero-release__video-shell">
           <video
             controls
             playsInline
             preload="metadata"
-            poster="/media/el-curro-de-batman-cover.jpg"
-            aria-label="El curro de Batman — Fracaso Inminente"
+            poster="/media/en-tu-mente-poster.jpg"
+            aria-label="En tu mente — Fracaso Inminente"
           >
-            <source src="/media/el-curro-de-batman.mp4" type="video/mp4" />
+            <source src="/media/en-tu-mente.mp4" type="video/mp4" />
             Tu navegador no puede reproducir este video.
           </video>
         </div>
-        <a className="hero-batman__instagram" href={REEL_URL} target="_blank" rel="noopener noreferrer">
+        <a className="hero-release__instagram" href={INSTAGRAM} target="_blank" rel="noopener noreferrer">
           Ver también en Instagram ↗
         </a>
       </div>

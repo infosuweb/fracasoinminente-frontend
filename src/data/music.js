@@ -9,16 +9,22 @@ export const YOUTUBE_CHANNEL = 'https://www.youtube.com/channel/UC_I0KeMzcVHRgre
 
 /** Single líder de la campaña actual (crecimiento Spotify) */
 export const LEADER = {
-  title: 'Otra vez en verano',
-  spotifyUrl: 'https://open.spotify.com/track/1OYsGwVQjXKSL9eVonTqO5',
+  title: 'Phalaropus',
+  spotifyUrl: 'https://open.spotify.com/track/635gTn5tC6CbNTPHOzPBW0',
   spotifyEmbedSrc:
-    'https://open.spotify.com/embed/track/1OYsGwVQjXKSL9eVonTqO5?utm_source=generator&theme=0',
-  bandcampUrl: 'https://fracasoinminente.bandcamp.com/track/otra-vez-en-verano',
-  bandcampTrackId: 1590949334,
+    'https://open.spotify.com/embed/track/635gTn5tC6CbNTPHOzPBW0?utm_source=generator&theme=0',
+  bandcampUrl: 'https://fracasoinminente.bandcamp.com/track/phalaropus',
+  bandcampTrackId: 814276696,
 }
 
 /** Discografía completa — más reciente primero (Bandcamp + Spotify, ago 2026) */
 export const RELEASES = [
+  {
+    title: 'Phalaropus',
+    year: '2026',
+    type: 'Single',
+    spotifyUrl: 'https://open.spotify.com/track/635gTn5tC6CbNTPHOzPBW0',
+  },
   {
     title: 'QPachó?',
     year: '2026',
@@ -132,6 +138,7 @@ export const RELEASES = [
  * IDs = tralbum_id de cada página /track (ago 2026).
  */
 export const BANDCAMP_TRACKS = [
+  { label: 'Phalaropus', id: 814276696 },
   { label: 'QPachó?', id: 2755078416 },
   { label: '77', id: 965501322 },
   { label: 'Otra vez en verano', id: 1590949334 },
