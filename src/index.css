@@ -621,7 +621,6 @@ body::after {
   .hero-release__copy {
     max-width: 100%;
     width: 100%;
-    padding: 1.25rem 0 0.5rem;
   }
 
   .hero-release__copy .lissajous-title__ink,
@@ -827,13 +826,27 @@ body::after {
 
 @media (max-width: 760px) {
   .hero-release {
-    min-height: 100svh;
-    padding: max(1rem, env(safe-area-inset-top)) 1rem max(4.25rem, calc(3.25rem + env(safe-area-inset-bottom)));
+    /* Lock to the real visible viewport so first paint is full-screen. */
+    height: var(--hero-vh, 100svh);
+    min-height: var(--hero-vh, 100svh);
+    max-height: var(--hero-vh, 100svh);
+    padding: max(0.65rem, env(safe-area-inset-top, 0px)) 0.85rem max(3.1rem, calc(2.4rem + env(safe-area-inset-bottom, 0px)));
     align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .hero-release__copy {
+    padding: 0.35rem 0 0;
+    max-height: min(72%, calc(var(--hero-vh, 100svh) - 5.5rem));
   }
 
   .hero-scroll-cue {
-    bottom: max(0.85rem, calc(0.6rem + env(safe-area-inset-bottom)));
+    bottom: max(0.55rem, calc(0.35rem + env(safe-area-inset-bottom, 0px)));
+  }
+
+  .lissajous-title {
+    margin: 0;
   }
 
   .lissajous-title,
