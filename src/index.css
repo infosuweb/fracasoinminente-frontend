@@ -469,7 +469,9 @@ body::after {
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
   align-items: center;
+  justify-items: stretch;
   min-height: 100svh;
   padding: clamp(1.25rem, 4vw, 4rem) clamp(1.25rem, 4vw, 4rem) 5.5rem;
   background: #ffffff;
@@ -547,11 +549,13 @@ body::after {
 .hero-release__copy {
   position: relative;
   z-index: 1;
+  grid-row: 1;
   min-width: 0;
   max-width: min(920px, 56vw);
   width: 100%;
   padding: clamp(2.5rem, 7vh, 5.5rem) 0 clamp(2rem, 6vh, 5rem);
-  overflow: hidden;
+  overflow: visible;
+  align-self: center;
 }
 
 .hero-release__copy .lissajous-title__ink {
@@ -621,6 +625,7 @@ body::after {
   .hero-release__copy {
     max-width: 100%;
     width: 100%;
+    padding: 0.5rem 0 0;
   }
 
   .hero-release__copy .lissajous-title__ink,
@@ -641,7 +646,7 @@ body::after {
   position: absolute;
   left: 50%;
   bottom: clamp(1.25rem, 4vh, 2.5rem);
-  z-index: 2;
+  z-index: 5;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -826,24 +831,32 @@ body::after {
 
 @media (max-width: 760px) {
   .hero-release {
-    /* Lock to the real visible viewport so first paint is full-screen. */
-    height: var(--hero-vh, 100svh);
-    min-height: var(--hero-vh, 100svh);
-    max-height: var(--hero-vh, 100svh);
-    padding: max(0.65rem, env(safe-area-inset-top, 0px)) 0.85rem max(4.75rem, calc(4rem + env(safe-area-inset-bottom, 0px)));
-    align-items: center;
+    min-height: 100svh;
+    height: auto;
+    max-height: none;
+    padding: 1rem 0.85rem 1rem;
+    align-items: stretch;
+    justify-items: center;
+    overflow: visible;
     box-sizing: border-box;
-    overflow: hidden;
   }
 
   .hero-release__copy {
-    padding: 0.35rem 0 0;
-    max-height: min(68%, calc(var(--hero-vh, 100svh) - 7rem));
+    grid-row: 1;
+    align-self: center;
+    max-height: none;
+    overflow: visible;
   }
 
+  /* In-flow on mobile so the arrow cannot sit under browser chrome / get clipped. */
   .hero-scroll-cue {
-    /* Keep above mobile browser chrome / home indicator. */
-    bottom: max(2.75rem, calc(2.1rem + env(safe-area-inset-bottom, 0px)));
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    grid-row: 2;
+    justify-self: center;
+    margin: 0.35rem 0 0.15rem;
     z-index: 5;
   }
 

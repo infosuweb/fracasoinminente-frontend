@@ -2,41 +2,12 @@ import { useLayoutEffect } from 'react'
 import LissajousTitle from './LissajousTitle'
 import HeroReelStage from './HeroReelStage'
 
-function syncHeroViewportHeight() {
-  const visual = window.visualViewport?.height
-  const inner = window.innerHeight
-  // Prefer the smaller value so content never sits under browser chrome.
-  const height = visual ? Math.min(visual, inner) : inner
-  document.documentElement.style.setProperty('--hero-vh', `${Math.round(height)}px`)
-}
-
 export default function Hero() {
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual'
     }
     window.scrollTo(0, 0)
-    syncHeroViewportHeight()
-
-    const onResize = () => syncHeroViewportHeight()
-    window.addEventListener('resize', onResize)
-    window.visualViewport?.addEventListener('resize', onResize)
-    window.visualViewport?.addEventListener('scroll', onResize)
-
-    // iOS often settles chrome after first paint
-    const t1 = window.setTimeout(syncHeroViewportHeight, 120)
-    const t2 = window.setTimeout(() => {
-      syncHeroViewportHeight()
-      window.scrollTo(0, 0)
-    }, 400)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-      window.visualViewport?.removeEventListener('resize', onResize)
-      window.visualViewport?.removeEventListener('scroll', onResize)
-      window.clearTimeout(t1)
-      window.clearTimeout(t2)
-    }
   }, [])
 
   return (
