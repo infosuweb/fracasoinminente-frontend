@@ -23,8 +23,6 @@
 
 html {
   scroll-behavior: smooth;
-  height: 100%;
-  height: -webkit-fill-available;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -40,8 +38,6 @@ html {
 
 body {
   margin: 0;
-  min-height: 100%;
-  min-height: -webkit-fill-available;
   background: var(--color-snow);
   color: var(--color-snow-ink);
   font-family: var(--font-mono);
@@ -213,8 +209,9 @@ body::after {
 .lissajous-title__board {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
-  overflow: visible;
+  overflow: hidden;
   grid-area: 1 / 1;
 }
 
@@ -399,17 +396,11 @@ body::after {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  min-height: 100vh;
-  min-height: 100dvh;
   min-height: 100svh;
-  min-height: -webkit-fill-available;
   padding: clamp(1.25rem, 4vw, 4rem) clamp(1.25rem, 4vw, 4rem) 5.5rem;
-  padding-top: max(clamp(1.25rem, 4vw, 4rem), env(safe-area-inset-top));
-  padding-bottom: max(5.5rem, calc(4rem + env(safe-area-inset-bottom)));
   background: #ffffff;
   color: #0a0a0a;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
 }
 
 .hero-reel {
@@ -484,8 +475,9 @@ body::after {
   z-index: 1;
   min-width: 0;
   max-width: min(920px, 56vw);
+  width: 100%;
   padding: clamp(2.5rem, 7vh, 5.5rem) 0 clamp(2rem, 6vh, 5rem);
-  overflow: visible;
+  overflow: hidden;
 }
 
 .hero-release__copy .lissajous-title__ink {
@@ -522,48 +514,42 @@ body::after {
 @media (max-width: 760px) {
   .hero-reel__stage {
     width: 100%;
-    /* Instagram WebView can leave the reveal clip stuck closed. */
     clip-path: none;
     animation: none;
   }
 
   .hero-reel__clip.is-active {
-    opacity: 0.42;
+    opacity: 0.34;
   }
 
   .hero-reel--inapp .hero-reel__clip.is-active {
-    opacity: 0.28;
+    opacity: 0.24;
   }
 
   .hero-reel__veil {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.55) 28%, rgba(255, 255, 255, 0.35) 52%, rgba(255, 255, 255, 0.88) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.35) 55%, rgba(255, 255, 255, 0.15) 100%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.62) 34%, rgba(255, 255, 255, 0.5) 58%, rgba(255, 255, 255, 0.92) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.4) 70%, rgba(255, 255, 255, 0.2) 100%);
   }
 
   .hero-reel--inapp .hero-reel__veil {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.72) 40%, rgba(255, 255, 255, 0.92) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.55) 100%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 45%, rgba(255, 255, 255, 0.94) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 100%);
   }
 
-  .hero-reel--inapp .hero-reel__grain {
+  .hero-reel--inapp .hero-reel__grain,
+  .hero-reel__grain {
     display: none;
   }
 
   .hero-release__copy {
     max-width: 100%;
     width: 100%;
-    padding: clamp(1.5rem, 8vh, 3rem) 0 1.25rem;
+    padding: 1.25rem 0 0.5rem;
   }
 
-  .hero-release__copy .lissajous-title__ink {
-    filter:
-      drop-shadow(0 0 14px rgba(255, 255, 255, 1))
-      drop-shadow(0 0 4px rgba(255, 255, 255, 1))
-      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95));
-  }
-
+  .hero-release__copy .lissajous-title__ink,
   .hero-release__copy .lissajous-title--plain .lissajous-title__ink {
     filter: none;
   }
@@ -573,7 +559,7 @@ body::after {
   }
 
   .platform-name {
-    font-size: clamp(1.55rem, 9vw, 2.35rem) !important;
+    font-size: clamp(1.45rem, 8.5vw, 2.2rem) !important;
   }
 }
 
@@ -766,17 +752,18 @@ body::after {
 
 @media (max-width: 760px) {
   .hero-release {
-    min-height: 100vh;
-    min-height: 100dvh;
     min-height: 100svh;
-    min-height: -webkit-fill-available;
-    padding: 1rem 1rem 4.5rem;
-    padding-top: max(1rem, env(safe-area-inset-top));
-    padding-bottom: max(4.5rem, calc(3.5rem + env(safe-area-inset-bottom)));
-    align-items: end;
+    padding: max(1rem, env(safe-area-inset-top)) 1rem max(4.25rem, calc(3.25rem + env(safe-area-inset-bottom)));
+    align-items: center;
   }
 
   .hero-scroll-cue {
-    bottom: max(1rem, calc(0.75rem + env(safe-area-inset-bottom)));
+    bottom: max(0.85rem, calc(0.6rem + env(safe-area-inset-bottom)));
+  }
+
+  .lissajous-title,
+  .lissajous-title__ink,
+  .lissajous-title__board {
+    max-width: 100%;
   }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { REEL_CLIPS } from '../data/reel'
 import { isSocialInAppBrowser } from '../lib/browser'
 
@@ -10,7 +10,7 @@ export default function HeroReelStage() {
   const [reducedMotion, setReducedMotion] = useState(false)
   const [inApp] = useState(() => isSocialInAppBrowser())
   const videoRefs = useRef(/** @type {Array<HTMLVideoElement | null>} */ ([]))
-  const clips = inApp ? REEL_CLIPS.slice(0, 1) : REEL_CLIPS
+  const clips = useMemo(() => (inApp ? REEL_CLIPS.slice(0, 1) : REEL_CLIPS), [inApp])
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -31,7 +31,7 @@ export default function HeroReelStage() {
         try {
           video.currentTime = 0
         } catch {
-          /* Instagram WebView can throw on seek before ready */
+          /* some WebViews throw if seek happens too early */
         }
         const play = video.play()
         if (play && typeof play.catch === 'function') play.catch(() => {})
