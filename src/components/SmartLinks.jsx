@@ -134,7 +134,7 @@ export default function SmartLinks() {
                     fontSize: '0.6rem',
                     letterSpacing: '0.14em',
                     textTransform: 'uppercase',
-                    color: link.primary ? 'rgba(255,255,255,0.75)' : 'var(--color-ink-faint)',
+                    color: link.primary ? 'rgba(5,5,5,0.55)' : 'var(--color-ink-faint)',
                   }}
                 >
                   {link.hint}

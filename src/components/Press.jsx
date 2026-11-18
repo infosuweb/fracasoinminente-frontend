@@ -61,7 +61,7 @@ export default function Press() {
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.9rem',
-                color: '#e8e8e8',
+                color: 'var(--color-ink)',
                 fontWeight: 700,
                 lineHeight: 1.4,
               }}

@@ -2,8 +2,10 @@ import { useState } from 'react'
 import {
   BANDCAMP_BASE,
   BANDCAMP_TRACKS,
-  LEADER,
+  SPOTIFY_PLAYLIST,
+  SPOTIFY_TRACKS,
   bandcampEmbedSrc,
+  spotifyEmbedSrc,
 } from '../data/music'
 
 /** @typedef {'spotify' | 'bandcamp'} ListenTab */
@@ -43,78 +45,65 @@ function tabLabel(id) {
 
 const TABS = /** @type {const} */ (['spotify', 'bandcamp'])
 
+function ExternalIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+      <path d="M14 5h5v5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10 14L19 5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+/**
+ * @param {{
+ *   tracks: Array<{ label: string, id: string | number }>,
+ *   activeId: string | number,
+ *   onSelect: (id: string | number) => void,
+ *   listLabel: string,
+ * }} props
+ */
+function TrackList({ tracks, activeId, onSelect, listLabel }) {
+  return (
+    <ul className="listen-panel__tracks" aria-label={listLabel}>
+      {tracks.map((track, index) => {
+        const selected = track.id === activeId
+        return (
+          <li key={track.id}>
+            <button
+              type="button"
+              className="listen-panel__track"
+              aria-current={selected ? 'true' : undefined}
+              onClick={() => onSelect(track.id)}
+            >
+              <span className="listen-panel__index">{String(index + 1).padStart(2, '0')}</span>
+              <span className="listen-panel__title">{track.label}</span>
+              <span className="listen-panel__play" aria-hidden="true">
+                {selected ? '▶' : ''}
+              </span>
+            </button>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
 export default function ListenPlayer() {
   const [tab, setTab] = useState(/** @type {ListenTab} */ ('spotify'))
+  const [spotifyTrackId, setSpotifyTrackId] = useState(SPOTIFY_TRACKS[0].id)
+  const [bandcampTrackId, setBandcampTrackId] = useState(BANDCAMP_TRACKS[0].id)
+
+  const activeSpotify =
+    SPOTIFY_TRACKS.find((track) => track.id === spotifyTrackId) ?? SPOTIFY_TRACKS[0]
+  const activeBandcamp =
+    BANDCAMP_TRACKS.find((track) => track.id === bandcampTrackId) ?? BANDCAMP_TRACKS[0]
 
   return (
-    <section className="px-6 sm:px-12 md:px-16 py-10 sm:py-14" id="listen">
+    <section className="px-6 sm:px-12 md:px-16 pt-4 sm:pt-6 pb-10 sm:pb-14" id="listen">
       <div className="flex items-center gap-4 mb-6">
         <h2 className="section-label">Reproducir</h2>
         <div className="flex-1" style={{ height: '1px', background: 'var(--color-line)' }} />
-      </div>
-
-      <div
-        className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 sm:p-6"
-        style={{
-          border: '1px solid var(--color-blood)',
-          background: 'var(--color-slab)',
-        }}
-      >
-        <div>
-          <p className="section-label" style={{ marginBottom: '0.5rem' }}>
-            Single líder
-          </p>
-          <p
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
-              fontWeight: 800,
-              fontSize: 'clamp(1.75rem, 5vw, 2.75rem)',
-              lineHeight: 1,
-              textTransform: 'uppercase',
-              margin: 0,
-              color: 'var(--color-ink)',
-            }}
-          >
-            {LEADER.title}
-            <span
-              className="ml-3 align-middle"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontStyle: 'normal',
-                fontWeight: 400,
-                fontSize: '0.55rem',
-                letterSpacing: '0.2em',
-                color: 'var(--color-blood)',
-                border: '1px solid var(--color-blood)',
-                padding: '2px 6px',
-                verticalAlign: 'middle',
-              }}
-            >
-              Nuevo
-            </span>
-          </p>
-        </div>
-        <a
-          href={LEADER.spotifyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cursor-pointer inline-flex items-center justify-center transition-colors duration-200"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.65rem',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            textDecoration: 'none',
-            color: '#050505',
-            background: 'var(--color-blood)',
-            minHeight: '44px',
-            padding: '0 1.25rem',
-            width: 'fit-content',
-          }}
-        >
-          Abrir en Spotify
-        </a>
       </div>
 
       <div
@@ -168,21 +157,25 @@ export default function ListenPlayer() {
         id="listen-panel-spotify"
         aria-labelledby="listen-tab-spotify"
         hidden={tab !== 'spotify'}
-        style={{
-          border: '1px solid var(--color-line)',
-          background: 'var(--color-slab)',
-        }}
+        className="listen-panel"
       >
         {tab === 'spotify' && (
-          <iframe
-            title={`Spotify: ${LEADER.title}`}
-            src={LEADER.spotifyEmbedSrc}
-            width="100%"
-            height="352"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          />
+          <>
+            <iframe
+              key={activeSpotify.id}
+              title={`Spotify: ${activeSpotify.label}`}
+              src={spotifyEmbedSrc(activeSpotify.id)}
+              className="listen-panel__player listen-panel__player--spotify"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+            <TrackList
+              tracks={SPOTIFY_TRACKS}
+              activeId={activeSpotify.id}
+              onSelect={setSpotifyTrackId}
+              listLabel="Temas en Spotify"
+            />
+          </>
         )}
       </div>
 
@@ -191,76 +184,53 @@ export default function ListenPlayer() {
         id="listen-panel-bandcamp"
         aria-labelledby="listen-tab-bandcamp"
         hidden={tab !== 'bandcamp'}
-        style={{
-          border: '1px solid var(--color-line)',
-          background: 'var(--color-slab)',
-          overflow: 'hidden',
-        }}
+        className="listen-panel"
       >
         {tab === 'bandcamp' && (
           <>
             <iframe
-              title={`Bandcamp: ${LEADER.title}`}
-              src={bandcampEmbedSrc(LEADER.bandcampTrackId)}
-              style={{ border: 0, width: '100%', height: '42px', display: 'block' }}
+              key={activeBandcamp.id}
+              title={`Bandcamp: ${activeBandcamp.label}`}
+              src={bandcampEmbedSrc(activeBandcamp.id, 'large')}
+              className="listen-panel__player listen-panel__player--bandcamp"
               seamless
               loading="lazy"
             />
-            {BANDCAMP_TRACKS.filter((track) => track.id !== LEADER.bandcampTrackId).map(
-              (track) => (
-                <iframe
-                  key={track.id}
-                  title={`Bandcamp: ${track.label}`}
-                  src={bandcampEmbedSrc(track.id)}
-                  style={{ border: 0, width: '100%', height: '42px', display: 'block' }}
-                  seamless
-                  loading="lazy"
-                />
-              ),
-            )}
+            <TrackList
+              tracks={BANDCAMP_TRACKS}
+              activeId={activeBandcamp.id}
+              onSelect={setBandcampTrackId}
+              listLabel="Temas en Bandcamp"
+            />
           </>
         )}
       </div>
 
-      {tab === 'bandcamp' && (
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.65rem',
-            color: 'var(--color-ink-faint)',
-            letterSpacing: '0.1em',
-            marginTop: '0.75rem',
-          }}
-        >
+      <div className="listen-open-row">
+        {tab === 'spotify' ? (
           <a
-            href={LEADER.bandcampUrl}
+            href={SPOTIFY_PLAYLIST}
             target="_blank"
             rel="noopener noreferrer"
-            className="cursor-pointer inline-flex items-center"
-            style={{
-              color: 'var(--color-blood)',
-              textDecoration: 'underline',
-              minHeight: '44px',
-            }}
+            className="listen-open-link"
+            aria-label="Abrir lista completa en Spotify"
+            title="Abrir lista completa en Spotify"
           >
-            {LEADER.title} en Bandcamp
+            <ExternalIcon />
           </a>
-          {' · '}
+        ) : (
           <a
             href={BANDCAMP_BASE}
             target="_blank"
             rel="noopener noreferrer"
-            className="cursor-pointer inline-flex items-center"
-            style={{
-              color: 'var(--color-blood)',
-              textDecoration: 'underline',
-              minHeight: '44px',
-            }}
+            className="listen-open-link"
+            aria-label="Abrir catálogo completo en Bandcamp"
+            title="Abrir catálogo completo en Bandcamp"
           >
-            Ver todo
+            <ExternalIcon />
           </a>
-        </p>
-      )}
+        )}
+      </div>
     </section>
   )
 }

@@ -1,7 +1,6 @@
 import Hero from './components/Hero'
 import ListenPlayer from './components/ListenPlayer'
 import MusicLinks from './components/MusicLinks'
-import Releases from './components/Releases'
 import Press from './components/Press'
 import Footer from './components/Footer'
 import SmartLinks from './components/SmartLinks'
@@ -31,9 +30,8 @@ export default function App() {
       <Hero />
       <div className="zone-dark">
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <ListenPlayer />
           <MusicLinks />
-          <Releases />
+          <ListenPlayer />
           <Press />
         </div>
         <Footer />

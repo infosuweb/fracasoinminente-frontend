@@ -58,16 +58,13 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer
-      className="px-6 sm:px-12 md:px-16 py-8"
-      style={{ borderTop: '1px solid var(--color-line)' }}
-    >
+    <footer className="px-6 sm:px-12 md:px-16 py-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <span
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: '0.7rem',
-            color: '#cccccc',
+            color: 'var(--color-ink)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
           }}
@@ -84,7 +81,7 @@ export default function Footer() {
               rel={s.external ? 'noopener noreferrer' : undefined}
               aria-label={s.label}
               className="transition-colors duration-150 hover:text-blood cursor-pointer inline-flex items-center justify-center"
-              style={{ color: '#cccccc', minWidth: '44px', minHeight: '44px' }}
+              style={{ color: 'var(--color-ink)', minWidth: '44px', minHeight: '44px' }}
             >
               {s.icon}
             </a>

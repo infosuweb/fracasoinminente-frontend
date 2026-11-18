@@ -1,0 +1,23 @@
+/** Brilla cast + Naranjo i2v — interleaved for variety */
+export const REEL_CLIPS = [
+  { id: 'pulcinella', src: '/media/reel/pulcinella.mp4', label: 'Pulcinella' },
+  { id: 'naranjo-01', src: '/media/reel/naranjo-01.mp4', label: 'Naranjo' },
+  { id: 'arlecchino', src: '/media/reel/arlecchino.mp4', label: 'Arlecchino' },
+  { id: 'naranjo-02', src: '/media/reel/naranjo-02.mp4', label: 'Naranjo' },
+  { id: 'pierrot', src: '/media/reel/pierrot.mp4', label: 'Pierrot' },
+  { id: 'naranjo-03', src: '/media/reel/naranjo-03.mp4', label: 'Naranjo' },
+  { id: 'capitano', src: '/media/reel/capitano.mp4', label: 'Capitano' },
+  { id: 'naranjo-04', src: '/media/reel/naranjo-04.mp4', label: 'Naranjo' },
+  { id: 'pantalone', src: '/media/reel/pantalone.mp4', label: 'Pantalone' },
+  { id: 'naranjo-05', src: '/media/reel/naranjo-05.mp4', label: 'Naranjo' },
+  { id: 'scaramuccia', src: '/media/reel/scaramuccia.mp4', label: 'Scaramuccia' },
+  { id: 'naranjo-06', src: '/media/reel/naranjo-06.mp4', label: 'Naranjo' },
+  { id: 'zani', src: '/media/reel/zani.mp4', label: 'Zani' },
+  { id: 'gagliardi', src: '/media/reel/gagliardi.mp4', label: 'Gagliardi' },
+  { id: 'zanni', src: '/media/reel/zanni.mp4', label: 'Zanni' },
+  { id: 'giangurgolo', src: '/media/reel/giangurgolo.mp4', label: 'Giangurgolo' },
+  { id: 'arlecchino-moderno', src: '/media/reel/arlecchino-moderno.mp4', label: 'Arlecchino moderno' },
+  { id: 'musico', src: '/media/reel/musico.mp4', label: 'Músico' },
+  { id: 'fritellino', src: '/media/reel/fritellino.mp4', label: 'Fritellino' },
+  { id: 'trivellino', src: '/media/reel/trivellino.mp4', label: 'Trivellino' },
+]
