@@ -282,6 +282,23 @@ body::after {
   filter: none;
 }
 
+/* Plain/mobile solid letters are black — echoes must contrast or they vanish. */
+.lissajous-title--plain .lissajous-title__echo--a {
+  stroke: #ffffff;
+  stroke-width: 3.2px;
+  opacity: 0.92;
+}
+
+.lissajous-title--plain .lissajous-title__echo--b {
+  stroke: #6a6a6a;
+  stroke-width: 2.6px;
+  opacity: 0.78;
+}
+
+.lissajous-title--plain .lissajous-title__main {
+  stroke-width: 2.8px;
+}
+
 .lissajous-title__echo {
   stroke: #0a0a0a;
   stroke-width: 2.8px;
@@ -374,6 +391,8 @@ body::after {
 
 @media (max-width: 640px) {
   .lissajous-title {
+    --echo-x: 8px;
+    --echo-y: 4px;
     margin: 0.35rem 0 0.75rem;
   }
 
@@ -381,20 +400,84 @@ body::after {
     stroke-width: 38;
   }
 
+  .lissajous-title__solid {
+    stroke-width: 40;
+  }
+
   .lissajous-title__echo {
-    stroke-width: 2px;
+    stroke-width: 2.4px;
   }
 
-  .lissajous-title__echo--a {
-    opacity: 0.62;
+  .lissajous-title--plain .lissajous-title__echo--a {
+    stroke: #ffffff;
+    stroke-width: 3.6px;
+    opacity: 1;
   }
 
-  .lissajous-title__echo--b {
-    opacity: 0.42;
+  .lissajous-title--plain .lissajous-title__echo--b {
+    stroke: #888888;
+    stroke-width: 2.8px;
+    opacity: 0.88;
   }
 
   .lissajous-title__main {
-    stroke-width: 2px;
+    stroke-width: 2.4px;
+  }
+
+  .lissajous-title--plain .lissajous-title__main {
+    stroke-width: 3px;
+  }
+
+  .lissajous-title--live.is-pulse .lissajous-title__echo--a {
+    animation: lissajous-echo-kick-mobile 1s cubic-bezier(0.16, 1, 0.3, 1) 1;
+  }
+
+  .lissajous-title--live.is-pulse .lissajous-title__echo--b {
+    animation: lissajous-echo-kick-alt-mobile 1s cubic-bezier(0.16, 1, 0.3, 1) 1;
+  }
+
+  .lissajous-title--live.is-pulse .lissajous-title__main {
+    animation: lissajous-stroke-kick-mobile 1s cubic-bezier(0.16, 1, 0.3, 1) 1;
+  }
+}
+
+@keyframes lissajous-echo-kick-mobile {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.45;
+  }
+  45% {
+    transform: translate(-18px, 8px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--echo-x) * -1), var(--echo-y));
+    opacity: 1;
+  }
+}
+
+@keyframes lissajous-echo-kick-alt-mobile {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.35;
+  }
+  45% {
+    transform: translate(20px, -7px);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(var(--echo-x), calc(var(--echo-y) * -1));
+    opacity: 0.88;
+  }
+}
+
+@keyframes lissajous-stroke-kick-mobile {
+  0%,
+  100% {
+    stroke-width: 2.4px;
+  }
+  40% {
+    stroke-width: 5px;
   }
 }
 

@@ -233,6 +233,15 @@ export default function LissajousTitle() {
     }
 
     const letters = [...byIndex.values()].sort((a, b) => a.index - b.index)
+    const mobileMq = window.matchMedia('(max-width: 760px)')
+    let motionBoost = mobileMq.matches ? 2.35 : 1
+    let echoBoost = mobileMq.matches ? 2.8 : 1
+    const onViewportChange = () => {
+      motionBoost = mobileMq.matches ? 2.35 : 1
+      echoBoost = mobileMq.matches ? 2.8 : 1
+      wake()
+    }
+    mobileMq.addEventListener('change', onViewportChange)
 
     let introStart = null
     let raf = 0
@@ -281,13 +290,13 @@ export default function LissajousTitle() {
 
         const ambient = reduced
           ? 0
-          : Math.sin(now * 1.7 + letter.index * 0.41) * AMBIENT_AMOUNT
+          : Math.sin(now * 1.7 + letter.index * 0.41) * AMBIENT_AMOUNT * motionBoost
 
         const delta =
           REST_DELTA -
           intro * INTRO_AMOUNT +
-          hover * HOVER_AMOUNT +
-          pulse * PULSE_AMOUNT +
+          hover * HOVER_AMOUNT * motionBoost +
+          pulse * PULSE_AMOUNT * motionBoost +
           ambient
 
         if (letter.drawn !== delta) {
@@ -296,17 +305,21 @@ export default function LissajousTitle() {
           letter.drawn = delta
         }
 
-        const wobble = reduced ? 0 : Math.sin(now * 0.9 + letter.index * 0.5) * 1.2
+        const wobble = reduced ? 0 : Math.sin(now * 0.9 + letter.index * 0.5) * 1.2 * motionBoost
         const transform = letter.turns
           ? `rotate(${intro * INTRO_TURN + wobble * (0.55 + pulse)}deg)`
-          : `rotate(${wobble * 0.7 + pulse * 4.2 * (letter.index % 2 === 0 ? 1 : -1)}deg)`
+          : `rotate(${wobble * 0.7 + pulse * 4.2 * motionBoost * (letter.index % 2 === 0 ? 1 : -1)}deg)`
         for (const group of letter.groups) group.style.transform = transform
       }
 
-      const echo = 3.4 + Math.sin(now * 2.4) * 2.2 + (root.classList.contains('is-pulse') ? 4.2 : 0)
+      const echo =
+        (3.4 + Math.sin(now * 2.4) * 2.2 + (root.classList.contains('is-pulse') ? 4.2 : 0)) *
+        echoBoost
       root.style.setProperty('--echo-x', `${echo.toFixed(2)}px`)
       root.style.setProperty('--echo-y', `${(echo * 0.48).toFixed(2)}px`)
 
+      // Keep ambient motion alive on mobile even after intro settles.
+      if (!reduced) busy = true
       raf = busy ? requestAnimationFrame(frame) : 0
     }
 
@@ -359,6 +372,7 @@ export default function LissajousTitle() {
       if (raf) cancelAnimationFrame(raf)
       cleanups.forEach((fn) => fn())
       window.removeEventListener('hero-reel:change', onReelChange)
+      mobileMq.removeEventListener('change', onViewportChange)
     }
   }, [])
 
