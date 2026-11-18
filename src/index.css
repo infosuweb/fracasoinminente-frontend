@@ -593,33 +593,29 @@ body::after {
   }
 
   .hero-reel__clip.is-active {
-    opacity: 0.92;
+    opacity: 0.68;
   }
 
   .hero-reel--inapp .hero-reel__clip.is-active {
-    opacity: 0.85;
+    opacity: 0.58;
   }
 
-  /* Lighter veil so the reel stays visible; letters are already solid on top. */
+  /* Slightly softer than desktop, still readable — not washed out. */
   .hero-reel__veil {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.45) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.12) 42%, transparent 70%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.22) 38%, rgba(255, 255, 255, 0.62) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.22) 48%, rgba(255, 255, 255, 0.08) 100%);
   }
 
   .hero-reel--inapp .hero-reel__veil {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.5) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.18) 50%, transparent 75%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.28) 42%, rgba(255, 255, 255, 0.68) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.28) 55%, rgba(255, 255, 255, 0.12) 100%);
   }
 
-  .hero-reel--inapp .hero-reel__grain {
-    display: none;
-  }
-
+  .hero-reel--inapp .hero-reel__grain,
   .hero-reel__grain {
-    display: block;
-    opacity: 0.1;
+    display: none;
   }
 
   .hero-release__copy {
