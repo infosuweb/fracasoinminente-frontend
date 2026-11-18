@@ -3,7 +3,10 @@ import LissajousTitle from './LissajousTitle'
 import HeroReelStage from './HeroReelStage'
 
 function syncHeroViewportHeight() {
-  const height = window.visualViewport?.height ?? window.innerHeight
+  const visual = window.visualViewport?.height
+  const inner = window.innerHeight
+  // Prefer the smaller value so content never sits under browser chrome.
+  const height = visual ? Math.min(visual, inner) : inner
   document.documentElement.style.setProperty('--hero-vh', `${Math.round(height)}px`)
 }
 
