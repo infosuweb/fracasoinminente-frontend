@@ -58,11 +58,11 @@ const INTRO_AMOUNT = Math.PI
 const INTRO_TURN = -24
 const INTRO_DURATION = 2
 const INTRO_STAGGER = 0.09
-const HOVER_AMOUNT = 0.3 * Math.PI
+const HOVER_AMOUNT = 0.42 * Math.PI
 const HOVER_DURATION = 4
-const AMBIENT_AMOUNT = 0.045 * Math.PI
-const PULSE_AMOUNT = 0.22 * Math.PI
-const PULSE_DURATION = 1.15
+const AMBIENT_AMOUNT = 0.11 * Math.PI
+const PULSE_AMOUNT = 0.38 * Math.PI
+const PULSE_DURATION = 1.05
 
 const easeInOut = (t) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2)
 const easeOutQuart = (t) => 1 - (1 - t) ** 4
@@ -281,7 +281,7 @@ export default function LissajousTitle() {
 
         const ambient = reduced
           ? 0
-          : Math.sin(now * 1.35 + letter.index * 0.37) * AMBIENT_AMOUNT
+          : Math.sin(now * 1.7 + letter.index * 0.41) * AMBIENT_AMOUNT
 
         const delta =
           REST_DELTA -
@@ -298,14 +298,14 @@ export default function LissajousTitle() {
 
         const wobble = reduced ? 0 : Math.sin(now * 0.9 + letter.index * 0.5) * 1.2
         const transform = letter.turns
-          ? `rotate(${intro * INTRO_TURN + wobble * (0.35 + pulse)}deg)`
-          : `rotate(${wobble * 0.35 + pulse * 2.5 * (letter.index % 2 === 0 ? 1 : -1)}deg)`
+          ? `rotate(${intro * INTRO_TURN + wobble * (0.55 + pulse)}deg)`
+          : `rotate(${wobble * 0.7 + pulse * 4.2 * (letter.index % 2 === 0 ? 1 : -1)}deg)`
         for (const group of letter.groups) group.style.transform = transform
       }
 
-      const echo = 2.2 + Math.sin(now * 2.1) * 1.4 + (root.classList.contains('is-pulse') ? 2.5 : 0)
+      const echo = 3.4 + Math.sin(now * 2.4) * 2.2 + (root.classList.contains('is-pulse') ? 4.2 : 0)
       root.style.setProperty('--echo-x', `${echo.toFixed(2)}px`)
-      root.style.setProperty('--echo-y', `${(echo * 0.35).toFixed(2)}px`)
+      root.style.setProperty('--echo-y', `${(echo * 0.48).toFixed(2)}px`)
 
       raf = busy ? requestAnimationFrame(frame) : 0
     }
