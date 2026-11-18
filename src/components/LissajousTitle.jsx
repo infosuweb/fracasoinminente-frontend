@@ -234,11 +234,12 @@ export default function LissajousTitle() {
 
     const letters = [...byIndex.values()].sort((a, b) => a.index - b.index)
     const mobileMq = window.matchMedia('(max-width: 760px)')
-    let motionBoost = mobileMq.matches ? 2.35 : 1
-    let echoBoost = mobileMq.matches ? 2.8 : 1
+    // Mobile: stronger path morph/rotation, but keep echo offsets modest so letters stay black.
+    let motionBoost = mobileMq.matches ? 2.8 : 1
+    let echoBoost = mobileMq.matches ? 1.35 : 1
     const onViewportChange = () => {
-      motionBoost = mobileMq.matches ? 2.35 : 1
-      echoBoost = mobileMq.matches ? 2.8 : 1
+      motionBoost = mobileMq.matches ? 2.8 : 1
+      echoBoost = mobileMq.matches ? 1.35 : 1
       wake()
     }
     mobileMq.addEventListener('change', onViewportChange)

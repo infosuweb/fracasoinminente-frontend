@@ -282,23 +282,6 @@ body::after {
   filter: none;
 }
 
-/* Plain/mobile solid letters are black — echoes must contrast or they vanish. */
-.lissajous-title--plain .lissajous-title__echo--a {
-  stroke: #ffffff;
-  stroke-width: 3.2px;
-  opacity: 0.92;
-}
-
-.lissajous-title--plain .lissajous-title__echo--b {
-  stroke: #6a6a6a;
-  stroke-width: 2.6px;
-  opacity: 0.78;
-}
-
-.lissajous-title--plain .lissajous-title__main {
-  stroke-width: 2.8px;
-}
-
 .lissajous-title__echo {
   stroke: #0a0a0a;
   stroke-width: 2.8px;
@@ -391,8 +374,8 @@ body::after {
 
 @media (max-width: 640px) {
   .lissajous-title {
-    --echo-x: 8px;
-    --echo-y: 4px;
+    --echo-x: 5px;
+    --echo-y: 3px;
     margin: 0.35rem 0 0.75rem;
   }
 
@@ -401,83 +384,83 @@ body::after {
   }
 
   .lissajous-title__solid {
-    stroke-width: 40;
+    stroke-width: 42;
   }
 
-  .lissajous-title__echo {
-    stroke-width: 2.4px;
-  }
-
-  .lissajous-title--plain .lissajous-title__echo--a {
-    stroke: #ffffff;
-    stroke-width: 3.6px;
-    opacity: 1;
-  }
-
+  /* Keep letters black; soft dark echoes only, no white wash. */
+  .lissajous-title__echo,
+  .lissajous-title--plain .lissajous-title__echo--a,
   .lissajous-title--plain .lissajous-title__echo--b {
-    stroke: #888888;
-    stroke-width: 2.8px;
-    opacity: 0.88;
+    stroke: #111111;
   }
 
-  .lissajous-title__main {
-    stroke-width: 2.4px;
+  .lissajous-title__echo--a,
+  .lissajous-title--plain .lissajous-title__echo--a {
+    stroke-width: 1.8px;
+    opacity: 0.35;
   }
 
+  .lissajous-title__echo--b,
+  .lissajous-title--plain .lissajous-title__echo--b {
+    stroke-width: 1.4px;
+    opacity: 0.22;
+  }
+
+  .lissajous-title__main,
   .lissajous-title--plain .lissajous-title__main {
-    stroke-width: 3px;
+    stroke-width: 2.2px;
   }
 
   .lissajous-title--live.is-pulse .lissajous-title__echo--a {
-    animation: lissajous-echo-kick-mobile 1s cubic-bezier(0.16, 1, 0.3, 1) 1;
+    animation: lissajous-echo-kick-mobile 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1;
   }
 
   .lissajous-title--live.is-pulse .lissajous-title__echo--b {
-    animation: lissajous-echo-kick-alt-mobile 1s cubic-bezier(0.16, 1, 0.3, 1) 1;
+    animation: lissajous-echo-kick-alt-mobile 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1;
   }
 
   .lissajous-title--live.is-pulse .lissajous-title__main {
-    animation: lissajous-stroke-kick-mobile 1s cubic-bezier(0.16, 1, 0.3, 1) 1;
+    animation: lissajous-stroke-kick-mobile 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1;
   }
 }
 
 @keyframes lissajous-echo-kick-mobile {
   0% {
     transform: translate(0, 0);
-    opacity: 0.45;
+    opacity: 0.15;
   }
   45% {
-    transform: translate(-18px, 8px);
-    opacity: 1;
+    transform: translate(-10px, 4px);
+    opacity: 0.5;
   }
   100% {
     transform: translate(calc(var(--echo-x) * -1), var(--echo-y));
-    opacity: 1;
+    opacity: 0.35;
   }
 }
 
 @keyframes lissajous-echo-kick-alt-mobile {
   0% {
     transform: translate(0, 0);
-    opacity: 0.35;
+    opacity: 0.1;
   }
   45% {
-    transform: translate(20px, -7px);
-    opacity: 0.95;
+    transform: translate(11px, -3px);
+    opacity: 0.4;
   }
   100% {
     transform: translate(var(--echo-x), calc(var(--echo-y) * -1));
-    opacity: 0.88;
+    opacity: 0.22;
   }
 }
 
 @keyframes lissajous-stroke-kick-mobile {
   0%,
   100% {
-    stroke-width: 2.4px;
+    stroke-width: 2.2px;
   }
   40% {
-    stroke-width: 5px;
+    stroke-width: 3.6px;
   }
 }
 
