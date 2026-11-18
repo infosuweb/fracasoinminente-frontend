@@ -409,7 +409,7 @@ export default function LissajousTitle() {
                           transformOrigin: `${originX}% ${originY}%`,
                         }}
                       >
-                        <path className="lissajous-title__fill" />
+                        <path className="lissajous-title__fill" strokeWidth={42} />
                       </g>
                     )
                   })}

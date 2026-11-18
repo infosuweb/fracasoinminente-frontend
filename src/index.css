@@ -245,15 +245,20 @@ body::after {
   pointer-events: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
 }
 
+/* Fill must scale with the SVG or mobile letters become fat blobs. */
 .lissajous-title__fill {
   stroke: #fff;
-  stroke-width: 36px;
+  stroke-width: 42;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+  vector-effect: none;
+}
+
+.lissajous-title__ink path {
+  vector-effect: non-scaling-stroke;
 }
 
 .lissajous-title__echo {
@@ -347,16 +352,20 @@ body::after {
 }
 
 @media (max-width: 640px) {
+  .lissajous-title {
+    margin: 0.35rem 0 0.75rem;
+  }
+
   .lissajous-title__fill {
-    stroke-width: 28px;
+    stroke-width: 38;
   }
 
   .lissajous-title__echo {
-    stroke-width: 1.6px;
+    stroke-width: 1.5px;
   }
 
   .lissajous-title__main {
-    stroke-width: 1.7px;
+    stroke-width: 1.6px;
   }
 }
 
@@ -370,7 +379,8 @@ body::after {
   padding: clamp(1.25rem, 4vw, 4rem) clamp(1.25rem, 4vw, 4rem) 5.5rem;
   background: #ffffff;
   color: #0a0a0a;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .hero-reel {
@@ -486,21 +496,34 @@ body::after {
   }
 
   .hero-reel__clip.is-active {
-    opacity: 0.82;
+    opacity: 0.42;
   }
 
   .hero-reel__veil {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.08) 32%, rgba(255, 255, 255, 0.05) 58%, rgba(255, 255, 255, 0.72) 100%),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0%, transparent 48%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.55) 28%, rgba(255, 255, 255, 0.35) 52%, rgba(255, 255, 255, 0.88) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.35) 55%, rgba(255, 255, 255, 0.15) 100%);
   }
 
   .hero-release__copy {
     max-width: 100%;
+    width: 100%;
+    padding: clamp(1.5rem, 8vh, 3rem) 0 1.25rem;
+  }
+
+  .hero-release__copy .lissajous-title__ink {
+    filter:
+      drop-shadow(0 0 14px rgba(255, 255, 255, 1))
+      drop-shadow(0 0 4px rgba(255, 255, 255, 1))
+      drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95));
   }
 
   .hero-reel__caption {
     display: none;
+  }
+
+  .platform-name {
+    font-size: clamp(1.55rem, 9vw, 2.35rem) !important;
   }
 }
 
@@ -694,10 +717,7 @@ body::after {
 @media (max-width: 760px) {
   .hero-release {
     min-height: 100svh;
-    padding: 1.25rem 1.25rem 5rem;
-  }
-
-  .hero-release__copy {
-    padding: 3rem 0 1rem;
+    padding: 1rem 1rem 4.5rem;
+    align-items: end;
   }
 }

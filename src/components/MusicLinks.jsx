@@ -70,7 +70,7 @@ export default function MusicLinks() {
                   {link.icon}
                 </span>
                 <span
-                  className="text-ink group-hover:text-blood transition-colors duration-200"
+                  className="platform-name text-ink group-hover:text-blood transition-colors duration-200"
                   style={{
                     fontFamily: 'var(--font-display)',
                     fontWeight: 800,
