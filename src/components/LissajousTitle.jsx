@@ -1,5 +1,6 @@
 import { useId, useLayoutEffect, useRef, useState } from 'react'
 import { REEL_CLIPS } from '../data/reel'
+import { canUseMaskedVideoFill } from '../lib/browser'
 
 // Single-stroke skeletons in a box of width w and height 100 (y down).
 // Ported from the Compile-style reference: open strokes are walked back
@@ -192,6 +193,7 @@ export default function LissajousTitle() {
   const fillVideoRef = useRef(null)
   const maskId = useId().replace(/:/g, '')
   const [clipSrc, setClipSrc] = useState(REEL_CLIPS[0].src)
+  const [videoFill] = useState(() => canUseMaskedVideoFill())
 
   useLayoutEffect(() => {
     const root = rootRef.current
@@ -361,84 +363,91 @@ export default function LissajousTitle() {
   }, [])
 
   useLayoutEffect(() => {
+    if (!videoFill) return
     const video = fillVideoRef.current
     if (!video) return
     video.load()
     const play = video.play()
     if (play && typeof play.catch === 'function') play.catch(() => {})
-  }, [clipSrc])
+  }, [clipSrc, videoFill])
 
   return (
-    <h1 className="lissajous-title lissajous-title--live" aria-label="Fracaso Inminente" ref={rootRef}>
+    <h1
+      className={`lissajous-title lissajous-title--live${videoFill ? '' : ' lissajous-title--plain'}`}
+      aria-label="Fracaso Inminente"
+      ref={rootRef}
+    >
       <span className="lissajous-title__label">Fracaso Inminente</span>
 
-      <svg
-        className="lissajous-title__board"
-        viewBox={`0 0 ${BOARD_WIDTH_TOTAL} ${BOARD_HEIGHT}`}
-        aria-hidden="true"
-        focusable="false"
-      >
-        <defs>
-          <mask
-            id={maskId}
-            maskUnits="userSpaceOnUse"
-            x="0"
-            y="0"
-            width={BOARD_WIDTH_TOTAL}
-            height={BOARD_HEIGHT}
-          >
-            <rect x="0" y="0" width={BOARD_WIDTH_TOTAL} height={BOARD_HEIGHT} fill="#000" />
-            {LINES.map((line, lineIndex) => {
-              const xOffset = BOARD_PAD + (BOARD_WIDTH - line.lineWidth) / 2
-              const yOffset = BOARD_PAD + lineIndex * (CELL + LINE_GAP)
-              return (
-                <g key={`mask-${line.word}`} transform={`translate(${xOffset}, ${yOffset})`}>
-                  {line.letters.map((letter) => {
-                    const originX =
-                      ((xOffset + letter.cellX + letter.width / 2) / BOARD_WIDTH_TOTAL) * 100
-                    const originY = ((yOffset + CELL / 2) / BOARD_HEIGHT) * 100
-                    return (
-                      <g
-                        key={`mask-${letter.index}`}
-                        data-char={letter.ch}
-                        data-index={letter.index}
-                        data-turns={letter.turns ? '1' : '0'}
-                        data-x={letter.cellX}
-                        style={{
-                          transformBox: 'view-box',
-                          transformOrigin: `${originX}% ${originY}%`,
-                        }}
-                      >
-                        <path className="lissajous-title__fill" strokeWidth={42} />
-                      </g>
-                    )
-                  })}
-                </g>
-              )
-            })}
-          </mask>
-        </defs>
-
-        <foreignObject
-          x="1"
-          y="1"
-          width={BOARD_WIDTH_TOTAL - 2}
-          height={BOARD_HEIGHT - 2}
-          mask={`url(#${maskId})`}
+      {videoFill ? (
+        <svg
+          className="lissajous-title__board"
+          viewBox={`0 0 ${BOARD_WIDTH_TOTAL} ${BOARD_HEIGHT}`}
+          aria-hidden="true"
+          focusable="false"
         >
-          <div xmlns="http://www.w3.org/1999/xhtml" className="lissajous-title__video-shell">
-            <video
-              ref={fillVideoRef}
-              className="lissajous-title__video"
-              src={clipSrc}
-              muted
-              playsInline
-              loop
-              preload="auto"
-            />
-          </div>
-        </foreignObject>
-      </svg>
+          <defs>
+            <mask
+              id={maskId}
+              maskUnits="userSpaceOnUse"
+              x="0"
+              y="0"
+              width={BOARD_WIDTH_TOTAL}
+              height={BOARD_HEIGHT}
+            >
+              <rect x="0" y="0" width={BOARD_WIDTH_TOTAL} height={BOARD_HEIGHT} fill="#000" />
+              {LINES.map((line, lineIndex) => {
+                const xOffset = BOARD_PAD + (BOARD_WIDTH - line.lineWidth) / 2
+                const yOffset = BOARD_PAD + lineIndex * (CELL + LINE_GAP)
+                return (
+                  <g key={`mask-${line.word}`} transform={`translate(${xOffset}, ${yOffset})`}>
+                    {line.letters.map((letter) => {
+                      const originX =
+                        ((xOffset + letter.cellX + letter.width / 2) / BOARD_WIDTH_TOTAL) * 100
+                      const originY = ((yOffset + CELL / 2) / BOARD_HEIGHT) * 100
+                      return (
+                        <g
+                          key={`mask-${letter.index}`}
+                          data-char={letter.ch}
+                          data-index={letter.index}
+                          data-turns={letter.turns ? '1' : '0'}
+                          data-x={letter.cellX}
+                          style={{
+                            transformBox: 'view-box',
+                            transformOrigin: `${originX}% ${originY}%`,
+                          }}
+                        >
+                          <path className="lissajous-title__fill" strokeWidth={42} />
+                        </g>
+                      )
+                    })}
+                  </g>
+                )
+              })}
+            </mask>
+          </defs>
+
+          <foreignObject
+            x="1"
+            y="1"
+            width={BOARD_WIDTH_TOTAL - 2}
+            height={BOARD_HEIGHT - 2}
+            mask={`url(#${maskId})`}
+          >
+            <div xmlns="http://www.w3.org/1999/xhtml" className="lissajous-title__video-shell">
+              <video
+                ref={fillVideoRef}
+                className="lissajous-title__video"
+                src={clipSrc}
+                muted
+                playsInline
+                loop
+                preload="metadata"
+              />
+            </div>
+          </foreignObject>
+        </svg>
+      ) : null}
 
       <svg
         className="lissajous-title__ink"
@@ -468,6 +477,9 @@ export default function LissajousTitle() {
                     }}
                   >
                     <rect x={letter.cellX} y={0} width={letter.width} height={CELL} />
+                    {!videoFill ? (
+                      <path className="lissajous-title__solid" strokeWidth={42} />
+                    ) : null}
                     <path className="lissajous-title__echo lissajous-title__echo--a" />
                     <path className="lissajous-title__echo lissajous-title__echo--b" />
                     <path className="lissajous-title__main" stroke={letter.color} />

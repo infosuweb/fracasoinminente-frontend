@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { REEL_CLIPS } from '../data/reel'
+import { isSocialInAppBrowser } from '../lib/browser'
 
 const HOLD_MS = 3600
 const FADE_MS = 800
@@ -7,7 +8,9 @@ const FADE_MS = 800
 export default function HeroReelStage() {
   const [active, setActive] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [inApp] = useState(() => isSocialInAppBrowser())
   const videoRefs = useRef(/** @type {Array<HTMLVideoElement | null>} */ ([]))
+  const clips = inApp ? REEL_CLIPS.slice(0, 1) : REEL_CLIPS
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -18,10 +21,18 @@ export default function HeroReelStage() {
   }, [])
 
   useEffect(() => {
+    if (active >= clips.length) setActive(0)
+  }, [active, clips.length])
+
+  useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (!video) return
       if (index === active) {
-        video.currentTime = 0
+        try {
+          video.currentTime = 0
+        } catch {
+          /* Instagram WebView can throw on seek before ready */
+        }
         const play = video.play()
         if (play && typeof play.catch === 'function') play.catch(() => {})
       } else {
@@ -29,30 +40,33 @@ export default function HeroReelStage() {
       }
     })
 
+    const clip = clips[active] ?? clips[0]
+    if (!clip) return
+
     window.dispatchEvent(
       new CustomEvent('hero-reel:change', {
         detail: {
-          id: REEL_CLIPS[active].id,
-          label: REEL_CLIPS[active].label,
+          id: clip.id,
+          label: clip.label,
           index: active,
-          src: REEL_CLIPS[active].src,
+          src: clip.src,
         },
       }),
     )
-  }, [active])
+  }, [active, clips])
 
   useEffect(() => {
-    if (reducedMotion) return undefined
+    if (reducedMotion || inApp || clips.length < 2) return undefined
     const timer = window.setInterval(() => {
-      setActive((prev) => (prev + 1) % REEL_CLIPS.length)
+      setActive((prev) => (prev + 1) % clips.length)
     }, HOLD_MS)
     return () => window.clearInterval(timer)
-  }, [reducedMotion])
+  }, [reducedMotion, inApp, clips.length])
 
   return (
-    <div className="hero-reel" aria-hidden="true">
+    <div className={`hero-reel${inApp ? ' hero-reel--inapp' : ''}`} aria-hidden="true">
       <div className="hero-reel__stage">
-        {REEL_CLIPS.map((clip, index) => (
+        {clips.map((clip, index) => (
           <video
             key={clip.id}
             ref={(node) => {
@@ -63,14 +77,15 @@ export default function HeroReelStage() {
             muted
             playsInline
             loop
-            preload={index === 0 || index === 1 ? 'auto' : 'metadata'}
+            autoPlay={index === 0}
+            preload={index === 0 ? 'metadata' : 'none'}
             style={{ transitionDuration: `${FADE_MS}ms` }}
           />
         ))}
         <div className="hero-reel__veil" />
         <div className="hero-reel__grain" />
       </div>
-      <p className="hero-reel__caption">{REEL_CLIPS[active].label}</p>
+      <p className="hero-reel__caption">{clips[active]?.label}</p>
     </div>
   )
 }

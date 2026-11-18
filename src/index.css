@@ -23,6 +23,8 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  height: -webkit-fill-available;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,11 +40,15 @@ html {
 
 body {
   margin: 0;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
   background: var(--color-snow);
   color: var(--color-snow-ink);
   font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 ::selection {
@@ -257,8 +263,26 @@ body::after {
   vector-effect: none;
 }
 
+/* Solid bubble for Instagram/Facebook WebViews where masked video fails. */
+.lissajous-title__solid {
+  stroke: #111111;
+  stroke-width: 42;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  vector-effect: none;
+}
+
 .lissajous-title__ink path {
   vector-effect: non-scaling-stroke;
+}
+
+.lissajous-title__ink .lissajous-title__solid {
+  vector-effect: none;
+}
+
+.lissajous-title--plain .lissajous-title__ink {
+  filter: none;
 }
 
 .lissajous-title__echo {
@@ -375,11 +399,16 @@ body::after {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
   min-height: 100svh;
+  min-height: -webkit-fill-available;
   padding: clamp(1.25rem, 4vw, 4rem) clamp(1.25rem, 4vw, 4rem) 5.5rem;
+  padding-top: max(clamp(1.25rem, 4vw, 4rem), env(safe-area-inset-top));
+  padding-bottom: max(5.5rem, calc(4rem + env(safe-area-inset-bottom)));
   background: #ffffff;
   color: #0a0a0a;
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-y: visible;
 }
 
@@ -493,16 +522,33 @@ body::after {
 @media (max-width: 760px) {
   .hero-reel__stage {
     width: 100%;
+    /* Instagram WebView can leave the reveal clip stuck closed. */
+    clip-path: none;
+    animation: none;
   }
 
   .hero-reel__clip.is-active {
     opacity: 0.42;
   }
 
+  .hero-reel--inapp .hero-reel__clip.is-active {
+    opacity: 0.28;
+  }
+
   .hero-reel__veil {
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.55) 28%, rgba(255, 255, 255, 0.35) 52%, rgba(255, 255, 255, 0.88) 100%),
       linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.35) 55%, rgba(255, 255, 255, 0.15) 100%);
+  }
+
+  .hero-reel--inapp .hero-reel__veil {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.72) 40%, rgba(255, 255, 255, 0.92) 100%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.55) 100%);
+  }
+
+  .hero-reel--inapp .hero-reel__grain {
+    display: none;
   }
 
   .hero-release__copy {
@@ -516,6 +562,10 @@ body::after {
       drop-shadow(0 0 14px rgba(255, 255, 255, 1))
       drop-shadow(0 0 4px rgba(255, 255, 255, 1))
       drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95));
+  }
+
+  .hero-release__copy .lissajous-title--plain .lissajous-title__ink {
+    filter: none;
   }
 
   .hero-reel__caption {
@@ -716,8 +766,17 @@ body::after {
 
 @media (max-width: 760px) {
   .hero-release {
+    min-height: 100vh;
+    min-height: 100dvh;
     min-height: 100svh;
+    min-height: -webkit-fill-available;
     padding: 1rem 1rem 4.5rem;
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(4.5rem, calc(3.5rem + env(safe-area-inset-bottom)));
     align-items: end;
+  }
+
+  .hero-scroll-cue {
+    bottom: max(1rem, calc(0.75rem + env(safe-area-inset-bottom)));
   }
 }
